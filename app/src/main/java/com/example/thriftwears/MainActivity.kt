@@ -10,37 +10,58 @@ import com.example.thriftwears.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var currentFragmentTag: String? = null
+
+    companion object {
+        private const val TAG = "MainActivity"
+        private const val MODEL_KEY = "MODEL_KEY"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Thread.sleep(3000)
-        installSplashScreen()
+        installSplashScreen() // Initiate splash screen with configuration, without blocking UI thread
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
-        replaceFragment(Home())
 
-        binding.bottomNavigationView.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.home -> replaceFragment(Home())
-                R.id.wish_list -> replaceFragment(WishList())
-                R.id.search -> replaceFragment(Search())
-                R.id.upload -> replaceFragment(Upload())
-                R.id.profile -> replaceFragment(Profile())
+        // Restore fragment by tag if available, else show the default fragment
+        currentFragmentTag = savedInstanceState?.getString(MODEL_KEY)
+        if (currentFragmentTag == null) {
+            replaceFragment(Home(), Home::class.java.simpleName)
+        } else {
+            val fragment = supportFragmentManager.findFragmentByTag(currentFragmentTag) ?: Home()
+            replaceFragment(fragment, currentFragmentTag!!)
+        }
 
-                else -> {}
-
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            val selectedFragment = when (item.itemId) {
+                R.id.home -> Home()
+                R.id.profile -> Profile()
+                R.id.search -> Search()
+                R.id.wish_list -> Saved()
+                R.id.upload -> Upload()
+                else -> return@setOnItemSelectedListener false
             }
+
+            replaceFragment(selectedFragment, selectedFragment::class.java.simpleName)
             true
         }
+
     }
 
-    private fun replaceFragment(fragment: Fragment) {
-        val manager = supportFragmentManager
-        val transaction = manager.beginTransaction()
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(MODEL_KEY, currentFragmentTag)
+    }
 
-        transaction.replace(R.id.frame_layout, fragment)
-        transaction.commit()
+    private fun replaceFragment(fragment: Fragment, tag: String) {
+        if (currentFragmentTag == tag) return // Avoid replacing with the same fragment
+
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.frame_layout, fragment, tag)
+            commit()
+        }
+        currentFragmentTag = tag
     }
 }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:paddingTop="25dp"
+    android:scrollbars="none"
+    android:paddingHorizontal="8dp"
+    android:id="@+id/saved"
+    android:backgroundTint="@color/white"
+    tools:context=".Saved">
+
+    <!-- Top Bar -->
+    <LinearLayout
+        android:id="@+id/savedBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <!-- Back Button -->
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/lightGrey"
+            android:contentDescription="@string/back"
+            android:src="@drawable/left" />
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Saved"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- Close Button -->
+        <ImageButton
+            android:id="@+id/closeButton"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/lightGrey"
+            android:contentDescription="@string/close"
+            android:src="@drawable/close" />
+    </LinearLayout>
+
+    <!-- RecyclerView for Saved Items -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/savedItemsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="8dp"
+        android:clipToPadding="false"
+        tools:listitem="@layout/saved_card_view" />
+
+</LinearLayout>

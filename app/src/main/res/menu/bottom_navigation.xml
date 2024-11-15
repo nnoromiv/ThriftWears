@@ -8,23 +8,27 @@
         />
 
     <item
-        android:title="@string/wish_list"
-        android:id="@+id/wish_list"
-        android:icon="@drawable/wish_list"
+        android:title="@string/my_wear"
+        android:id="@+id/profile"
+        android:icon="@drawable/user"
         />
+
     <item
         android:title="@string/search"
         android:id="@+id/search"
         android:icon="@drawable/search"
         />
+
+    <item
+        android:title="@string/saved"
+        android:id="@+id/wish_list"
+        android:icon="@drawable/wish_list"
+        />
+
     <item
         android:title="@string/upload"
         android:id="@+id/upload"
         android:icon="@drawable/upload"
         />
-    <item
-        android:title="@string/profile"
-        android:id="@+id/profile"
-        android:icon="@drawable/user"
-        />
+
 </menu>

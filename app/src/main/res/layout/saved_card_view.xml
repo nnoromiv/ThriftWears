@@ -1,0 +1,86 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="3dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/saved_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp">
+
+            <!-- ImageView -->
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:adjustViewBounds="true"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/item_image"
+                android:background="@drawable/rounded_corners" />
+
+            <!-- Content Layout -->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:padding="8dp">
+
+                <!-- Name TextView -->
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="4dp"
+                    tools:text="Item Name" />
+
+                <!-- Price TextView -->
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="4dp"
+                    tools:text="£20.00" />
+
+                <!-- Description TextView -->
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    tools:text="Short description of the item." />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Bottom Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:background="#B0B0B0" />
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

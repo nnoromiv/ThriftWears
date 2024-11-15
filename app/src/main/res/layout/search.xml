@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="25dp"
+    android:paddingHorizontal="8dp"
+    android:id="@+id/search"
+    android:background="@color/white"
+    android:backgroundTint="@color/white"
+    android:orientation="vertical"
+    tools:context=".Search">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.example.thriftwears.components.SearchBar
+            android:id="@+id/searchSearchBar"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/cartButton"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/rounded_button"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/white"
+            android:contentDescription="@string/cart"
+            android:src="@drawable/cart"
+            />
+
+    </LinearLayout>
+
+    <com.example.thriftwears.components.EmptySearch
+        android:id="@+id/emptySearchBar"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_height="match_parent"
+        />
+
+
+</LinearLayout>
