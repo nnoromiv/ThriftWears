@@ -24,8 +24,8 @@
         <!-- Back Button -->
         <ImageButton
             android:id="@+id/backButton"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/rounded_button"
             android:backgroundTint="@color/lightGrey"
             android:contentDescription="@string/back"
@@ -34,10 +34,10 @@
         <!-- Title -->
         <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Saved"
+            android:text="@string/saved"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -45,8 +45,8 @@
         <!-- Close Button -->
         <ImageButton
             android:id="@+id/closeButton"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/rounded_button"
             android:backgroundTint="@color/lightGrey"
             android:contentDescription="@string/close"
