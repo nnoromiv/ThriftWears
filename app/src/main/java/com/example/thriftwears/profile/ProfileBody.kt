@@ -3,10 +3,8 @@ package com.example.thriftwears.profile
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import com.example.thriftwears.R
 import com.example.thriftwears.components.Title
 

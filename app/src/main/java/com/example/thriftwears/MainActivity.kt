@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
     private var currentFragmentTag: String? = null
 
     companion object {
-        private const val TAG = "MainActivity"
         private const val MODEL_KEY = "MODEL_KEY"
     }
 

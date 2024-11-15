@@ -12,7 +12,7 @@ class SavedAdapter(
 
     inner class SavedCardViewHolder(private val binding: SavedCardViewBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(cardViewItem: Item) {
-            binding.name.text = cardViewItem.title ?: "Unknown Title"
+            binding.name.text = cardViewItem.title
             Picasso.get()
                 .load(cardViewItem.image)
                 .fit()
@@ -20,7 +20,7 @@ class SavedAdapter(
                 .tag("IMAGE_LOADING")
                 .into(binding.image)
 
-            binding.description.text = cardViewItem.description ?: "No description available"
+            binding.description.text = cardViewItem.description
             binding.price.text = buildString {
                 append('£')
                 append(cardViewItem.price.toString())

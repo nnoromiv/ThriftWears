@@ -29,10 +29,11 @@
         android:id="@+id/uploadFloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom | right"
+        android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        android:layout_weight="1"
         android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/cart"
         android:src="@android:drawable/sym_action_chat"
         app:backgroundTint="#F4F4F4" />
 

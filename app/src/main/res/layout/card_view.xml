@@ -28,8 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:adjustViewBounds="true"
-                android:clipToOutline="true"
                 android:scaleType="centerCrop"
+                android:clipToOutline="true"
                 android:contentDescription="@string/item_image"
                 android:background="@drawable/rounded_corners" />
 
