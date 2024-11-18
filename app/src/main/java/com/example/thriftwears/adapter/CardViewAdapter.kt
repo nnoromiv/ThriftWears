@@ -1,17 +1,20 @@
-package com.example.thriftwears.card
+package com.example.thriftwears.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.thriftwears.ItemViewActivity
 import com.example.thriftwears.databinding.CardViewBinding
+import com.example.thriftwears.item.CardViewItemClass
 import com.squareup.picasso.Picasso
 
-class Adapter(
-    private val items: List<Item>
-) : RecyclerView.Adapter<Adapter.CardViewHolder>() {
+class CardViewAdapter(
+    private val items: List<CardViewItemClass>
+) : RecyclerView.Adapter<CardViewAdapter.CardViewHolder>() {
 
     inner class CardViewHolder(private val binding: CardViewBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(cardViewItem: Item) {
+        fun bind(cardViewItem: CardViewItemClass) {
             binding.name.text = cardViewItem.title
             Picasso.get()
                 .load(cardViewItem.image.toString())
@@ -20,10 +23,18 @@ class Adapter(
                 .tag("IMAGE_LOADING")
                 .into(binding.image)
 
-            binding.description.text= cardViewItem.description
             binding.price.text= buildString {
                 append('£')
                 append(cardViewItem.price.toString())
+            }
+            binding.itemId.setOnClickListener{
+                val intent = Intent(binding.root.context, ItemViewActivity::class.java)
+                intent.putExtra("name", cardViewItem.title)
+                intent.putExtra("image", cardViewItem.image.toString())
+                intent.putExtra("price", cardViewItem.price.toString())
+                intent.putExtra("description", cardViewItem.description)
+
+                binding.root.context.startActivity(intent)
             }
         }
     }

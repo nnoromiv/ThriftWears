@@ -59,6 +59,7 @@
         </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/shoppingSaved"
         android:layout_width="match_parent"
@@ -74,7 +75,7 @@
             android:backgroundTint="@color/lightGrey"
             android:layout_gravity="center"
             android:contentDescription="@string/cart"
-            android:src="@drawable/love"
+            android:src="@drawable/saved"
             />
 
         <LinearLayout
@@ -136,6 +137,36 @@
             android:gravity="center"
             android:textSize="15sp"
             android:text="@string/selling"
+            android:layout_marginHorizontal="10dp"
+            android:textColor="@color/black"
+            android:textStyle="normal"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/soldItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginVertical="2dp"
+        android:layout_gravity="center"
+        >
+
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/lightGrey"
+            android:layout_gravity="center"
+            android:contentDescription="@string/cart"
+            android:src="@drawable/list"
+            />
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:text="Listed Items"
             android:layout_marginHorizontal="10dp"
             android:textColor="@color/black"
             android:textStyle="normal"/>

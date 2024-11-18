@@ -1,17 +1,18 @@
-package com.example.thriftwears.card
+package com.example.thriftwears.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thriftwears.databinding.SavedCardViewBinding
+import com.example.thriftwears.item.CardViewItemClass
 import com.squareup.picasso.Picasso
 
-class SavedAdapter(
-    private val items: List<Item>
-) : RecyclerView.Adapter<SavedAdapter.SavedCardViewHolder>() {
+class SavedCardViewAdapter(
+    private val items: List<CardViewItemClass>
+) : RecyclerView.Adapter<SavedCardViewAdapter.SavedCardViewHolder>() {
 
     inner class SavedCardViewHolder(private val binding: SavedCardViewBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(cardViewItem: Item) {
+        fun bind(cardViewItem: CardViewItemClass) {
             binding.name.text = cardViewItem.title
             Picasso.get()
                 .load(cardViewItem.image)

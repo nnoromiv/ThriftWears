@@ -10,9 +10,9 @@
     >
 
     <ImageView
-        android:layout_width="50dp"
+        android:layout_width="48dp"
         android:layout_height="match_parent"
-        android:padding="5dp"
+        android:padding="8dp"
         android:background="@drawable/rounded_corners"
         android:contentDescription="@string/item_image"
         android:src="@drawable/user"
@@ -45,10 +45,9 @@
 
     <ImageButton
         android:id="@+id/cartButton"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:background="@drawable/rounded_button"
-        android:backgroundTint="@color/white"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@android:color/transparent"
         android:layout_gravity="center"
         android:contentDescription="@string/cart"
         android:src="@drawable/cart"

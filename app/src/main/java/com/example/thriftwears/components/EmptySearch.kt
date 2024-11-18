@@ -16,5 +16,4 @@ class EmptySearch @JvmOverloads constructor(
         LayoutInflater.from(context).inflate(R.layout.empty_search, this, true)
     }
 
-
 }

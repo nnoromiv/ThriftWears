@@ -1,6 +1,10 @@
 package com.example.thriftwears
 
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -18,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreen() // Initiate splash screen with configuration, without blocking UI thread
+        installSplashScreen()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         enableEdgeToEdge()
@@ -33,6 +37,7 @@ class MainActivity : AppCompatActivity() {
             replaceFragment(fragment, currentFragmentTag!!)
         }
 
+        // Set up bottom navigation item selection
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             val selectedFragment = when (item.itemId) {
                 R.id.home -> Home()
@@ -43,10 +48,13 @@ class MainActivity : AppCompatActivity() {
                 else -> return@setOnItemSelectedListener false
             }
 
+            // Toggle BottomNavigationView visibility
+            binding.bottomNavigationView.visibility =
+                if (item.itemId == R.id.upload || item.itemId == R.id.wish_list) View.GONE else View.VISIBLE
+
             replaceFragment(selectedFragment, selectedFragment::class.java.simpleName)
             true
         }
-
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -54,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         outState.putString(MODEL_KEY, currentFragmentTag)
     }
 
-    private fun replaceFragment(fragment: Fragment, tag: String) {
+    fun replaceFragment(fragment: Fragment, tag: String) {
         if (currentFragmentTag == tag) return // Avoid replacing with the same fragment
 
         supportFragmentManager.beginTransaction().apply {

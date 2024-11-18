@@ -17,6 +17,7 @@
 
 
         <LinearLayout
+            android:id="@+id/itemId"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,13 +32,14 @@
                 android:scaleType="centerCrop"
                 android:clipToOutline="true"
                 android:contentDescription="@string/item_image"
-                android:background="@drawable/rounded_corners" />
+                android:background="@drawable/rounded_corners"
+                />
 
             <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="7dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="7dp"
             >
 
             <!-- Name TextView -->
@@ -48,27 +50,28 @@
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:layout_marginBottom="4dp"
+                app:drawableRightCompat="@drawable/saved"
                 tools:text="Item Name" />
 
-                <!-- Price TextView -->
-                <TextView
-                    android:id="@+id/price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="4dp"
-                    tools:text="£20.00" />
+            <!-- Price TextView -->
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginBottom="4dp"
+                tools:text="£20.00" />
 
-                <!-- Description TextView -->
-                <TextView
-                    android:id="@+id/description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    tools:text="Short description of the item." />
+            <!-- Description TextView -->
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                tools:text="Short description of the item." />
 
             </LinearLayout>
 

@@ -22,7 +22,7 @@
     <item
         android:title="@string/saved"
         android:id="@+id/wish_list"
-        android:icon="@drawable/wish_list"
+        android:icon="@drawable/saved"
         />
 
     <item

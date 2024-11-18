@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingTop="35dp"
+    android:paddingHorizontal="8dp"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:backgroundTint="@color/white"
+    android:orientation="vertical"
+    tools:context=".ItemViewActivity"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/savedBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <!-- Back Button -->
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/back"
+                android:src="@drawable/left" />
+
+            <!-- Title -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Item Details"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                android:background="@android:color/transparent"
+                android:backgroundTint="@android:color/transparent">
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <!-- ImageView -->
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="5dp"
+                        android:scaleType="center"
+                        android:clipToOutline="true"
+                        android:contentDescription="@string/item_image"
+                        android:background="@drawable/rounded_corners"
+                        />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/moreImagesRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:clipToPadding="false"
+                        tools:listitem="@layout/more_images" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="7dp"
+                        >
+
+                        <!-- Name TextView -->
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp"
+                            android:layout_marginBottom="4dp"
+                            app:drawableRightCompat="@drawable/saved"
+                            tools:text="Item Name" />
+
+                        <!-- Price TextView -->
+                        <TextView
+                            android:id="@+id/price"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="4dp"
+                            tools:text="£20.00" />
+
+                        <!-- Description TextView -->
+                        <TextView
+                            android:id="@+id/delivery"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/holo_green_dark"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            tools:text="Free delivery in 2-3 days" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_button"
+                            android:backgroundTint="@android:color/white"
+                            android:paddingHorizontal="25dp"
+                            android:text="Buy Now"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <ImageButton
+                            android:id="@+id/cartButton"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@android:color/transparent"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/cart"
+                            android:src="@drawable/cart"
+                            />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_margin="5dp"
+                        tools:text="Item Description" />
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp"
+                        android:layout_margin="5dp"
+                        tools:text="Native lyres finds by on to. Land memory have it now climes delight the. To departed delight to if the ancient delight, heart stalked cell nor say, he den knew but save hall seemed such. Neer for glorious of fabled knew. Name him high passed little might known of a,." />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_margin="5dp"
+                        tools:text="Seller" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        >
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:padding="10dp"
+                            android:background="@drawable/rounded_corners"
+                            android:contentDescription="@string/item_image"
+                            android:src="@drawable/user"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:paddingHorizontal="10dp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/sellerName"
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:textSize="15sp"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                tools:text="John Doe"
+                                />
+
+                            <TextView
+                                android:id="@+id/sellerYear"
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:textSize="12sp"
+                                android:textColor="@color/gray_400"
+                                tools:text="@string/member_since_2024"
+                                android:textStyle="normal"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_button"
+                        android:backgroundTint="@android:color/white"
+                        android:layout_marginVertical="5dp"
+                        android:paddingHorizontal="25dp"
+                        android:text="Seller's Other Items"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/uploadFloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/cart"
+        android:src="@drawable/chat"
+        app:backgroundTint="#F4F4F4" />
+
+</FrameLayout>

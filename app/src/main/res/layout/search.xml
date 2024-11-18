@@ -21,15 +21,15 @@
             android:id="@+id/searchSearchBar"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:layout_marginRight="8dp"
             android:layout_height="wrap_content" />
 
         <ImageButton
             android:id="@+id/cartButton"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="@drawable/rounded_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@android:color/transparent"
             android:layout_gravity="center"
-            android:backgroundTint="@color/white"
             android:contentDescription="@string/cart"
             android:src="@drawable/cart"
             />
