@@ -1,10 +1,8 @@
 package com.example.thriftwears.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.thriftwears.ItemViewActivity
 import com.example.thriftwears.databinding.MoreImagesBinding
 import com.example.thriftwears.item.MoreImagesItemClass
 import com.squareup.picasso.Picasso

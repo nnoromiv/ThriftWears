@@ -2,9 +2,6 @@ package com.example.thriftwears
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -18,6 +15,16 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val MODEL_KEY = "MODEL_KEY"
+
+        fun replaceFragment(mainActivity: MainActivity, fragment: Fragment, tag: String) {
+            if (mainActivity.currentFragmentTag == tag) return // Avoid replacing with the same fragment
+
+            mainActivity.supportFragmentManager.beginTransaction().apply {
+                replace(R.id.frame_layout, fragment, tag)
+                commit()
+            }
+            mainActivity.currentFragmentTag = tag
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,10 +38,10 @@ class MainActivity : AppCompatActivity() {
         // Restore fragment by tag if available, else show the default fragment
         currentFragmentTag = savedInstanceState?.getString(MODEL_KEY)
         if (currentFragmentTag == null) {
-            replaceFragment(Home(), Home::class.java.simpleName)
+            replaceFragment(this, Home(), Home::class.java.simpleName)
         } else {
             val fragment = supportFragmentManager.findFragmentByTag(currentFragmentTag) ?: Home()
-            replaceFragment(fragment, currentFragmentTag!!)
+            replaceFragment(this, fragment, currentFragmentTag!!)
         }
 
         // Set up bottom navigation item selection
@@ -50,9 +57,9 @@ class MainActivity : AppCompatActivity() {
 
             // Toggle BottomNavigationView visibility
             binding.bottomNavigationView.visibility =
-                if (item.itemId == R.id.upload || item.itemId == R.id.wish_list) View.GONE else View.VISIBLE
+                if (item.itemId == R.id.upload) View.GONE else View.VISIBLE
 
-            replaceFragment(selectedFragment, selectedFragment::class.java.simpleName)
+            replaceFragment(this, selectedFragment, selectedFragment::class.java.simpleName)
             true
         }
     }
@@ -62,13 +69,4 @@ class MainActivity : AppCompatActivity() {
         outState.putString(MODEL_KEY, currentFragmentTag)
     }
 
-    fun replaceFragment(fragment: Fragment, tag: String) {
-        if (currentFragmentTag == tag) return // Avoid replacing with the same fragment
-
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.frame_layout, fragment, tag)
-            commit()
-        }
-        currentFragmentTag = tag
-    }
 }

@@ -21,7 +21,10 @@ class SavedCardViewAdapter(
                 .tag("IMAGE_LOADING")
                 .into(binding.image)
 
-            binding.description.text = cardViewItem.description
+            binding.description.text = buildString {
+                append(cardViewItem.description.slice(0..50))
+                append("...")
+            }
             binding.price.text = buildString {
                 append('£')
                 append(cardViewItem.price.toString())

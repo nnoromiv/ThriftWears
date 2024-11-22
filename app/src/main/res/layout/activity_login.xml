@@ -4,14 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:paddingVertical="35dp"
+    android:paddingHorizontal="8dp"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
-    android:layout_marginHorizontal="10dp"
-    android:layout_marginVertical="20dp"
-    android:id="@+id/login_layout"
-    tools:context=".Signup">
+    android:id="@+id/login_activity"
+    tools:context=".LoginActivity">
 
     <TextView
+        android:id="@+id/closeLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -41,6 +43,59 @@
         android:textColor="@color/black"
         android:textSize="12sp" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/white"
+        android:background="@color/white"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/loginEmail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/lightGrey"
+            android:background="@drawable/grey_rounded_button"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            app:drawableEndCompat="@drawable/user" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/loginPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/lightGrey"
+            android:background="@drawable/grey_rounded_button"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/togglePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="@string/show_password"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="14sp"
+            android:textStyle="bold|italic" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,6 +104,7 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/loginEmailButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_button"
@@ -69,11 +125,12 @@
             android:layout_marginBottom="16dp">
 
             <!-- Left Line -->
-            <View
+            <view
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_weight="1"
-                android:background="#B0B0B0" />
+                android:background="#B0B0B0"
+                class="android.widget.TextView"/>
 
             <!-- "OR" Text -->
             <TextView
@@ -86,11 +143,12 @@
                 android:textSize="16sp" />
 
             <!-- Right Line -->
-            <View
+            <view
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_weight="1"
-                android:background="#B0B0B0" />
+                android:background="#B0B0B0"
+                class="android.widget.TextView"/>
         </LinearLayout>
 
 
@@ -114,6 +172,7 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/goToSignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/create_an_account"

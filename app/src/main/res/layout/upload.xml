@@ -26,15 +26,15 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="start|center_vertical"
-            android:text="Upload an item"
+            android:text="@string/upload_an_item"
             android:textColor="#000000"
             android:textSize="14sp"
             android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/closeButton"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/back"
             android:src="@drawable/close" />
@@ -46,8 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="5dp"
         android:layout_marginTop="10dp"
-        android:gravity="left"
-        android:text="Photos"
+        android:gravity="start"
+        android:text="@string/photos"
         android:textColor="#000000"
         android:textSize="14sp"
         android:textStyle="normal" />
@@ -58,7 +58,7 @@
         android:backgroundTint="@android:color/transparent"
         android:gravity="center_vertical"
         android:paddingHorizontal="15dp"
-        android:text="Upload Photos"
+        android:text="@string/upload_photos"
         android:textColor="@color/black"
         app:cornerRadius="10dp"
         app:strokeColor="@color/lightGrey"
@@ -71,7 +71,8 @@
         android:backgroundTint="@android:color/transparent"
         android:gravity="center_vertical"
         android:paddingHorizontal="15dp"
-        android:text="Take Photos"
+        android:maxWidth="320dp"
+        android:text="@string/take_photos"
         android:textColor="@color/black"
         app:cornerRadius="10dp"
         app:strokeColor="@color/lightGrey"
@@ -82,9 +83,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="5dp"
-        android:gravity="left"
-        android:text="Title"
-        android:textColor="#000000"
+        android:gravity="start"
+        android:text="@string/title"
+        android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="normal" />
 
@@ -99,9 +100,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/grey_rounded_button"
-            android:contentDescription="title"
-            android:hint="Provide a descriptive title"
+            android:hint="@string/provide_a_descriptive_title"
             android:inputType="text|textAutoComplete|textAutoCorrect"
+            android:maxWidth="320dp"
             android:maxLength="80"
             android:textSize="15sp" />
 
@@ -112,8 +113,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="5dp"
-        android:gravity="left"
-        android:text="Category"
+        android:gravity="start"
+        android:text="@string/category"
         android:textColor="#000000"
         android:textSize="14sp"
         android:textStyle="normal" />
@@ -121,10 +122,12 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Select an option"
+        android:hint="@string/select_an_option"
         app:boxBackgroundMode="outline">
 
         <AutoCompleteTextView
+            android:maxWidth="320dp"
+            android:hint="@string/category"
             android:id="@+id/dropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -143,20 +146,23 @@
         android:gravity="bottom"
         android:orientation="vertical"
         android:paddingVertical="20dp">
-        <View
+
+        <view
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_gravity="bottom"
             android:layout_marginVertical="15dp"
-            android:background="#B0B0B0" />
+            class="android.widget.TextView"
+            android:background="#FFFFFF" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_button"
             android:backgroundTint="@android:color/white"
+            android:maxWidth="320dp"
             android:paddingHorizontal="25dp"
-            android:text="Continue"
+            android:text="@string/button_continue"
             android:textColor="@color/white"
             android:textStyle="bold" />
     </LinearLayout>

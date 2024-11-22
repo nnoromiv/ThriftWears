@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.thriftwears.LoginActivity
 import com.example.thriftwears.MainActivity
 import com.example.thriftwears.R
 import com.example.thriftwears.components.Title
@@ -25,13 +26,11 @@ class ProfileBody @JvmOverloads constructor(
             this.context.startActivity(intent)
         }
 
-        findViewById<LinearLayout>(R.id.shoppingSaved).setOnClickListener{
-//            val intent = Intent(this.context, MainActivity::class.java)
-//            this.context.startActivity(intent)
-        }
-
-        "Shortcuts".also { findViewById<Title>(R.id.shortCutTitle).findViewById<TextView>(R.id.titleText).text = it }
         "Account".also { findViewById<Title>(R.id.accountTitle).findViewById<TextView>(R.id.titleText).text = it }
+        findViewById<TextView>(R.id.accountLogOut).setOnClickListener{
+            val intent = Intent(this.context, LoginActivity::class.java)
+            this.context.startActivity(intent)
+        }
     }
 
 }

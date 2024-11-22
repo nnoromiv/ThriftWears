@@ -10,6 +10,7 @@
     android:background="@color/white"
     android:backgroundTint="@color/white"
     android:orientation="vertical"
+    android:id="@+id/item_view_layout"
     tools:context=".ItemViewActivity"
     >
 
@@ -40,7 +41,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Item Details"
+                android:text="@string/item_details"
                 android:textColor="#000000"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -127,7 +128,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@android:color/holo_green_dark"
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             android:textStyle="bold"
                             tools:text="Free delivery in 2-3 days" />
 
@@ -145,7 +146,7 @@
                             android:background="@drawable/rounded_button"
                             android:backgroundTint="@android:color/white"
                             android:paddingHorizontal="25dp"
-                            android:text="Buy Now"
+                            android:text="@string/buy_now"
                             android:textColor="@color/white"
                             android:textStyle="bold" />
 
@@ -177,7 +178,7 @@
                         android:textColor="@android:color/black"
                         android:textSize="12sp"
                         android:layout_margin="5dp"
-                        tools:text="Native lyres finds by on to. Land memory have it now climes delight the. To departed delight to if the ancient delight, heart stalked cell nor say, he den knew but save hall seemed such. Neer for glorious of fabled knew. Name him high passed little might known of a,." />
+                        tools:text="Native lyres finds by on to. Land memory have it now climes delight the. To departed delight to if the ancient delight, heart stalked cell nor say, he den knew but save hall seemed such. Near for glorious of fabled knew. Name him high passed little might known of a,." />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -240,7 +241,7 @@
                         android:backgroundTint="@android:color/white"
                         android:layout_marginVertical="5dp"
                         android:paddingHorizontal="25dp"
-                        android:text="Seller's Other Items"
+                        android:text="@string/seller_s_other_items"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
 

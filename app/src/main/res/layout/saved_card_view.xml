@@ -76,11 +76,12 @@
         </LinearLayout>
 
         <!-- Bottom Divider -->
-        <View
+        <view
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_gravity="bottom"
-            android:background="#B0B0B0" />
+            android:background="#B0B0B0"
+            class="android.widget.TextView"/>
 
     </androidx.cardview.widget.CardView>
 

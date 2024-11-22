@@ -3,13 +3,10 @@ package com.example.thriftwears
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.thriftwears.adapter.MoreImagesAdapter
-import com.example.thriftwears.adapter.SavedCardViewAdapter
 import com.example.thriftwears.databinding.ActivityItemViewBinding
 import com.example.thriftwears.item.MoreImagesItemClass
 import com.squareup.picasso.Picasso
@@ -50,9 +47,9 @@ class ItemViewActivity : AppCompatActivity() {
 
         val bundle: Bundle? = intent.extras
         val iName = bundle!!.getString("name")
-        val iImage = bundle!!.getString("image")
-        val iPrice = bundle!!.getString("price")
-        val iDescription = bundle!!.getString("description")
+        val iImage = bundle.getString("image")
+        val iPrice = bundle.getString("price")
+        val iDescription = bundle.getString("description")
 
        binding.name.text = iName
         Picasso.get()
@@ -75,8 +72,8 @@ class ItemViewActivity : AppCompatActivity() {
         }
 
         binding.description.text = iDescription
-        binding.delivery.text = "Free delivery for 2 to 3 days"
-        binding.sellerName.text = "John Doe"
+        "Free delivery for 2 to 3 days".also { binding.delivery.text = it }
+        "John Doe".also { binding.sellerName.text = it }
 
         binding.sellerYear.text= buildString {
             append("Member since")
