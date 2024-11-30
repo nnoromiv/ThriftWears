@@ -33,6 +33,7 @@
             app:chipStartPadding="12dp"
             app:chipEndPadding="12dp"
             app:checkedIconVisible="false"
+            android:textColor="@color/black"
             android:text="@string/local"
              />
 
@@ -45,6 +46,7 @@
             app:chipStartPadding="12dp"
             app:chipEndPadding="12dp"
             app:checkedIconVisible="false"
+            android:textColor="@color/black"
             android:text="@string/festive"
              />
 
@@ -58,6 +60,7 @@
             app:chipStartPadding="12dp"
             app:chipEndPadding="12dp"
             app:checkedIconVisible="false"
+            android:textColor="@color/black"
             android:text="@string/fashion"
             />
 

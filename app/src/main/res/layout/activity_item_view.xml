@@ -80,6 +80,7 @@
                         android:layout_marginTop="5dp"
                         android:scaleType="center"
                         android:clipToOutline="true"
+                        tools:src="@drawable/avatar"
                         android:contentDescription="@string/item_image"
                         android:background="@drawable/rounded_corners"
                         />
@@ -90,6 +91,9 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
                         android:clipToPadding="false"
+                        tools:itemCount="4"
+                        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:orientation="horizontal"
                         tools:listitem="@layout/more_images" />
 
                     <LinearLayout

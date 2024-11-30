@@ -3,6 +3,7 @@ package com.example.thriftwears
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.thriftwears.adapter.SavedCardViewAdapter
 import com.example.thriftwears.databinding.SavedBinding
 import com.example.thriftwears.item.CardViewItemClass
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class Saved : Fragment() {
 
     private var _binding: SavedBinding? = null
     private val binding get() = _binding!!
+    private lateinit var auth: FirebaseAuth
 
     private val img = Uri.parse("https://images.unsplash.com/photo-1730727384555-35318cb80600?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D")
 
@@ -25,6 +30,22 @@ class Saved : Fragment() {
         CardViewItemClass(  "item007", "Joggers", img, "Native lyres finds by on to. Land memory have it now climes delight the. To departed delight to if the ancient delight, heart stalked cell nor say, he den knew but save hall seemed such. Near for glorious of fabled knew. Name him high passed little might known of a,.", 600.0),
         CardViewItemClass(  "item008", "Nike air", img, "Native lyres finds by on to. Land memory have it now climes delight the. To departed delight to if the ancient delight, heart stalked cell nor say, he den knew but save hall seemed such. Near for glorious of fabled knew. Name him high passed little might known of a,.", 800.0),
     )
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        auth = Firebase.auth // Initialize FirebaseAuth instance
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if (currentUser == null) {
+            Log.d("SAVED", "User is not signed in.")
+            updateUI()
+        } else {
+            Log.d("SAVED", "User is signed in: $currentUser.uid")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +74,13 @@ class Saved : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null // Avoid memory leaks
+    }
+
+    private fun updateUI() {
+        // Navigate to LoginActivity and finish the parent activity
+        val intent = Intent(requireContext(), LoginActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 
 }

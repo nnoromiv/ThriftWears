@@ -1,5 +1,6 @@
 package com.example.thriftwears
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -35,7 +36,8 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        // Restore fragment by tag if available, else show the default fragment
+        window.statusBarColor = getColor(R.color.primary)
+
         currentFragmentTag = savedInstanceState?.getString(MODEL_KEY)
         if (currentFragmentTag == null) {
             replaceFragment(this, Home(), Home::class.java.simpleName)

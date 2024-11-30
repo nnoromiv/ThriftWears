@@ -7,18 +7,36 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.thriftwears.databinding.ActivitySignupBinding
+import com.example.thriftwears.item.UserItemClass
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
 
 class SignupActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignupBinding
     private var currentState: String? = null
     private var showPassword = false
-//    val passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{8,}$"
+    private lateinit var auth: FirebaseAuth
+    private val db = Firebase.firestore
+
 
     companion object {
-        const val EMAIL_PATTERN = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"
-        private const val MODEL_KEY = "LOGIN_KEY"
+        private const val MODEL_KEY = "SIGNUP_KEY"
+        private const val TAG = "SignupActivity"
+    }
+
+    public override fun onStart() {
+        super.onStart()
+        auth = Firebase.auth
+
+        auth.currentUser?.let {
+            Log.d(TAG, "User is already signed in: ${it.email}")
+            updateToMainActivity()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +49,8 @@ class SignupActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        window.statusBarColor = getColor(R.color.primary)
+
         // Restore previous state or set initial UI state
         currentState = savedInstanceState?.getString(MODEL_KEY)
         if (currentState == null) {
@@ -38,60 +58,125 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(MODEL_KEY, currentState)
+    }
+
     private fun initializeUI() {
         // Set up UI elements
+        binding.createAccountButton.backgroundTintList = ContextCompat.getColorStateList(this, R.color.primary)
+        binding.createAccountGoogleButton.backgroundTintList = ContextCompat.getColorStateList(this, R.color.primary)
 
-        binding.backToLogin.setOnClickListener{
-            val intent = Intent(this, LoginActivity::class.java)
-            this.startActivity(intent)
+
+        binding.progressBar.visibility = android.view.View.GONE
+
+        binding.backToLogin.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
 
         binding.goToLogin.setOnClickListener{
-            val intent = Intent(this, LoginActivity::class.java)
-            this.startActivity(intent)
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
 
         binding.togglePassword.setOnClickListener {
-            binding.togglePassword.setOnClickListener {
-                showPassword = !showPassword
-                binding.togglePassword.text = if (showPassword) "Hide Password" else "Show Password"
-                binding.signUpPassword.inputType = if (showPassword) {
-                    InputType.TYPE_CLASS_TEXT // Show password as plain text
-                } else {
-                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD // Mask password
-                }
-                binding.signUpPassword.setSelection(binding.signUpPassword.text!!.length) // Ensure cursor stays at the end
+            showPassword = !showPassword
+            binding.togglePassword.text = if (showPassword) "Hide Password" else "Show Password"
+            binding.signUpPassword.inputType = if (showPassword) {
+                InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            } else {
+                InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             }
+
+            binding.signUpPassword.setSelection(binding.signUpPassword.text?.length ?: 0)
         }
 
         binding.createAccountButton.setOnClickListener {
-            val firstName = binding.signUpFirstName.text
-            val lastName = binding.signUpLastName.text
-            val email = binding.signUpEmail.text
-            val password = binding.signUpPassword.text
 
-            // Perform login logic here
-            if(firstName.isNullOrEmpty() || lastName.isNullOrEmpty() || email.isNullOrEmpty() || password.isNullOrEmpty()){
-                Toast.makeText(this, "A compulsory field is empty", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+            auth = Firebase.auth
+            val firstName = binding.signUpFirstName.text.toString()
+            val lastName = binding.signUpLastName.text.toString()
+            val email = binding.signUpEmail.text.toString()
+            val password = binding.signUpPassword.text.toString()
 
-            if(!Regex(EMAIL_PATTERN).matches(email.toString())){
-                Toast.makeText(this, "Invalid Email", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+            if (!validateInput(firstName, lastName, email, password)) return@setOnClickListener
 
-            Log.i("SIGNUP INFO", "Email: $email, Password: $password, First Name: $firstName, Last Name: $lastName")
+            binding.createAccountButton.isEnabled = false
+            binding.progressBar.visibility = android.view.View.VISIBLE
 
-//            val intent = Intent(this, MainActivity::class.java)
-//            this.startActivity(intent)
+            val userItemClassData = UserItemClass(
+                email,
+                firstName,
+                lastName,
+            )
+
+            createFirebaseUser(email, password, userItemClassData)
         }
 
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString(MODEL_KEY, currentState)
+    private fun validateInput(firstName: String, lastName: String, email: String, password: String): Boolean {
+        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            showToast("All fields are required")
+            return false
+        }
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            showToast("Invalid email format")
+            return false
+        }
+        if (password.length < 6) {
+            showToast("Password must be at least 6 characters")
+            return false
+        }
+        return true
+    }
+
+
+    private fun updateUI() {
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
+    }
+
+    private fun updateToMainActivity() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+    }
+
+    private fun showToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+    private fun createFirebaseUser(email: String, password: String, userItemClassData: UserItemClass){
+        binding.createAccountButton.isEnabled = true
+        binding.progressBar.visibility = android.view.View.GONE
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    saveUserToFireStore(user!!.uid, userItemClassData)
+                } else {
+                    showToast("Authentication failed: ${task.exception?.message}")
+                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                }
+            }
+    }
+
+    private fun saveUserToFireStore(uid: String, userItemClassData: UserItemClass) {
+        userItemClassData.id = uid
+        userItemClassData.timeStamp = com.google.firebase.Timestamp.now()
+
+        db.collection("users")
+            .document(uid)
+            .set(userItemClassData)
+            .addOnSuccessListener { docRef ->
+                Log.d(TAG, "createUserWithEmail:success, user: $docRef")
+                updateUI()
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error adding document", e)
+                showToast("Failed to save user data")
+            }
     }
 
 }

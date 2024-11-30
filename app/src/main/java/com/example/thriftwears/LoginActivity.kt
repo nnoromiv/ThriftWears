@@ -7,16 +7,34 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.example.thriftwears.SignupActivity.Companion
 import com.example.thriftwears.databinding.ActivityLoginBinding
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.auth
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private var currentState: String? = null
     private var showPassword = false
+    private lateinit var auth: FirebaseAuth
 
     companion object {
         private const val MODEL_KEY = "LOGIN_KEY"
+        private const val TAG = "LoginActivity"
+    }
+
+    public override fun onStart() {
+        super.onStart()
+        auth = Firebase.auth
+
+        auth.currentUser?.let {
+            Log.d(TAG, "User is already signed in: ${it.email}")
+            updateUI(auth.currentUser)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +42,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Enable edge-to-edge layout
         enableEdgeToEdge()
+        window.statusBarColor = getColor(R.color.primary)
 
         // Inflate layout with ViewBinding
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -38,9 +57,13 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initializeUI() {
         // Set up UI elements
+        binding.loginEmailButton.backgroundTintList = ContextCompat.getColorStateList(this, R.color.primary)
+        binding.loginGoogleButton.backgroundTintList = ContextCompat.getColorStateList(this, R.color.primary)
+
+        binding.progressBar.visibility = android.view.View.GONE
 
         binding.closeLogin.setOnClickListener{
-            val intent = Intent(this, SignupActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             this.startActivity(intent)
         }
 
@@ -63,24 +86,18 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.loginEmailButton.setOnClickListener {
-            val email = binding.loginEmail.text
-            val password = binding.loginPassword.text
 
-            // Perform login logic here
-            if(email.isNullOrEmpty() || password.isNullOrEmpty()){
-                Toast.makeText(this, "A compulsory field is empty", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+            auth = Firebase.auth
+            val email = binding.loginEmail.text.toString()
+            val password = binding.loginPassword.text.toString()
 
-            if(!Regex(SignupActivity.EMAIL_PATTERN).matches(email.toString())){
-                Toast.makeText(this, "Invalid Email", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+            if (!validateInput(email, password)) return@setOnClickListener
 
-            Log.i("LOGIN INFO", "Email: $email, Password: $password")
+            binding.loginEmailButton.isEnabled = false
+            binding.progressBar.visibility = android.view.View.VISIBLE
 
-//            val intent = Intent(this, MainActivity::class.java)
-//            this.startActivity(intent)
+            loginFirebaseUser(email, password)
+
         }
 
     }
@@ -88,6 +105,41 @@ class LoginActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(MODEL_KEY, currentState)
+    }
+
+    private fun updateUI(user: FirebaseUser?) {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+    }
+
+    private fun showToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+    private fun validateInput(email: String, password: String): Boolean {
+        if (email.isEmpty() || password.isEmpty()) {
+            showToast("All fields are required")
+            return false
+        }
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            showToast("Invalid email format")
+            return false
+        }
+
+        return true
+    }
+
+    private fun loginFirebaseUser(email: String, password: String){
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    updateUI(user)
+                } else {
+                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                    showToast("Authentication failed: ${task.exception?.message}")
+                }
+            }
+        binding.loginEmailButton.isEnabled = true
+        binding.progressBar.visibility = android.view.View.GONE
     }
 
 }

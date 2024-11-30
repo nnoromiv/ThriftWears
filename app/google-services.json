@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1046465020051",
+    "project_id": "thriftwears-78671",
+    "storage_bucket": "thriftwears-78671.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1046465020051:android:c5dc87f806ddd081964d66",
+        "android_client_info": {
+          "package_name": "com.example.thriftwears"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA88oVfEIM0FAPJ57u446Cf2w60VnPZ9I0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -14,12 +14,13 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/homeSearchInput"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:backgroundTint="@color/lightGrey"
             android:background="@drawable/grey_rounded_button"
             android:hint="@string/search_for_anything"
             android:inputType="text|textAutoComplete"
             android:textAlignment="viewStart"
+            android:textColorHint="@color/primary"
             android:textColor="@color/black"
             app:drawableEndCompat="@drawable/mdi_search" />
 

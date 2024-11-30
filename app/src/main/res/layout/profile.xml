@@ -8,7 +8,7 @@
     android:background="@color/white"
     android:backgroundTint="@color/white"
     android:orientation="vertical"
-    android:paddingTop="25dp"
+    android:paddingTop="20dp"
     tools:context=".Profile">
 
     <com.example.thriftwears.profile.ProfileBar

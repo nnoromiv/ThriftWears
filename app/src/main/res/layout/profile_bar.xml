@@ -2,10 +2,11 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="70dp"
     android:orientation="horizontal"
-    android:background="@color/lightGrey"
+    android:background="@color/primary"
     android:padding="10dp"
     >
 
@@ -15,7 +16,7 @@
         android:padding="8dp"
         android:background="@drawable/rounded_corners"
         android:contentDescription="@string/item_image"
-        android:src="@drawable/user"
+        android:src="@drawable/avatar"
         />
 
     <LinearLayout
@@ -27,26 +28,29 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/fullName"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:textSize="15sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold"
             tools:text="John Doe"
             />
         <TextView
+            android:id="@+id/memberSince"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:textSize="12sp"
-            android:textColor="@color/gray_400"
-            android:text="@string/member_since_2024"
+            android:textColor="@color/lightGrey"
+            tools:text="@string/member_since_2024"
             android:textStyle="normal"/>
     </LinearLayout>
 
     <ImageButton
         android:id="@+id/cartButton"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:tint="@color/white"
         android:background="@android:color/transparent"
         android:layout_gravity="center"
         android:contentDescription="@string/cart"
