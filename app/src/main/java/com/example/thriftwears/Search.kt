@@ -1,10 +1,12 @@
 package com.example.thriftwears
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import com.example.thriftwears.databinding.SearchBinding
 
 class Search : Fragment() {
@@ -22,8 +24,11 @@ class Search : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Set up your UI components or logic here, using `binding`
-        // e.g., binding.textView.text = "Welcome to Home Fragment"
+
+        binding.cartButton.setOnClickListener {
+            val intent = Intent(requireContext(), CartActivity::class.java)
+            requireContext().startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {

@@ -10,9 +10,7 @@ import com.example.thriftwears.LoginActivity
 import com.example.thriftwears.MainActivity
 import com.example.thriftwears.R
 import com.example.thriftwears.components.Title
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 
 class ProfileBody @JvmOverloads constructor(
     context: Context,

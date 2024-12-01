@@ -26,8 +26,8 @@
 
         <ImageButton
             android:id="@+id/cartButton"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@android:color/transparent"
             android:layout_gravity="center"
             android:contentDescription="@string/cart"

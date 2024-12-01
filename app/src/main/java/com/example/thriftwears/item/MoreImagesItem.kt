@@ -2,7 +2,7 @@ package com.example.thriftwears.item
 
 import android.net.Uri
 
-data class MoreImagesItemClass(
+data class MoreImagesItem(
     val id: String,
     val image: Uri,
 )

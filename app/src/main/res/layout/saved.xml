@@ -26,8 +26,8 @@
         <!-- Back Button -->
         <ImageButton
             android:id="@+id/backButton"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
             app:tint="@color/white"
             android:background="@android:color/transparent"            android:contentDescription="@string/back"

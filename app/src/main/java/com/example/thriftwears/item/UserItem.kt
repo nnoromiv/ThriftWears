@@ -2,7 +2,7 @@ package com.example.thriftwears.item
 
 import com.google.firebase.Timestamp
 
-data class UserItemClass(
+data class UserItem(
     var email: String? = null,
     var firstName: String? = null,
     var lastName: String? = null,

@@ -9,7 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.thriftwears.databinding.ActivitySignupBinding
-import com.example.thriftwears.item.UserItemClass
+import com.example.thriftwears.item.UserItem
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -106,7 +106,7 @@ class SignupActivity : AppCompatActivity() {
             binding.createAccountButton.isEnabled = false
             binding.progressBar.visibility = android.view.View.VISIBLE
 
-            val userItemClassData = UserItemClass(
+            val userItemClassData = UserItem(
                 email,
                 firstName,
                 lastName,
@@ -146,7 +146,7 @@ class SignupActivity : AppCompatActivity() {
 
     private fun showToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
-    private fun createFirebaseUser(email: String, password: String, userItemClassData: UserItemClass){
+    private fun createFirebaseUser(email: String, password: String, userItemClassData: UserItem){
         binding.createAccountButton.isEnabled = true
         binding.progressBar.visibility = android.view.View.GONE
 
@@ -162,7 +162,7 @@ class SignupActivity : AppCompatActivity() {
             }
     }
 
-    private fun saveUserToFireStore(uid: String, userItemClassData: UserItemClass) {
+    private fun saveUserToFireStore(uid: String, userItemClassData: UserItem) {
         userItemClassData.id = uid
         userItemClassData.timeStamp = com.google.firebase.Timestamp.now()
 

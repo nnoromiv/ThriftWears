@@ -4,15 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thriftwears.databinding.MoreImagesBinding
-import com.example.thriftwears.item.MoreImagesItemClass
+import com.example.thriftwears.item.MoreImagesItem
 import com.squareup.picasso.Picasso
 
 class MoreImagesAdapter(
-    private val items: List<MoreImagesItemClass>
+    private val items: List<MoreImagesItem>
 ) : RecyclerView.Adapter<MoreImagesAdapter.MoreImagesHolder>() {
 
     inner class MoreImagesHolder(private val binding: MoreImagesBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(cardViewItem: MoreImagesItemClass) {
+        fun bind(cardViewItem: MoreImagesItem) {
             Picasso.get()
                 .load(cardViewItem.image.toString())
                 .fit()

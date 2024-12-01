@@ -1,11 +1,13 @@
 package com.example.thriftwears.home
 
 import android.content.Context
+import android.content.Intent
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
+import com.example.thriftwears.CartActivity
 import com.example.thriftwears.R
 
 class HomeBar @JvmOverloads constructor(
@@ -18,8 +20,8 @@ class HomeBar @JvmOverloads constructor(
         LayoutInflater.from(context).inflate(R.layout.home_bar, this, true)
 
         findViewById<ImageButton>(R.id.cartButton).setOnClickListener{
-            val message = "Cart Clicked"
-            Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, CartActivity::class.java)
+            context.startActivity(intent)
         }
     }
 

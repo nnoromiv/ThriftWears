@@ -56,4 +56,9 @@
     <string name="category">Category</string>
     <string name="select_an_option">Select an option</string>
     <string name="button_continue">Continue</string>
+    <string name="item_title">Item Title</string>
+    <string name="description">Description</string>
+    <string name="describe_this_item">Describe this item</string>
+    <string name="welcome_to_thriftwears">Welcome to ThriftWears</string>
+    <string name="total">Total: £%1$s</string>
 </resources>

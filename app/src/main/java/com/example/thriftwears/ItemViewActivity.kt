@@ -5,10 +5,11 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.thriftwears.adapter.MoreImagesAdapter
 import com.example.thriftwears.databinding.ActivityItemViewBinding
-import com.example.thriftwears.item.MoreImagesItemClass
+import com.example.thriftwears.item.MoreImagesItem
 import com.squareup.picasso.Picasso
 
 class ItemViewActivity : AppCompatActivity() {
@@ -19,10 +20,10 @@ class ItemViewActivity : AppCompatActivity() {
     private val img = Uri.parse("https://images.unsplash.com/photo-1730727384555-35318cb80600?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D")
 
     private val moreImagesList = listOf(
-        MoreImagesItemClass(  "image001",img),
-        MoreImagesItemClass(  "image002",img),
-        MoreImagesItemClass(  "image003",img),
-        MoreImagesItemClass(  "image004",img),
+        MoreImagesItem(  "image001",img),
+        MoreImagesItem(  "image002",img),
+        MoreImagesItem(  "image003",img),
+        MoreImagesItem(  "image004",img),
     )
 
     companion object {
@@ -38,6 +39,8 @@ class ItemViewActivity : AppCompatActivity() {
         // Inflate layout with ViewBinding
         binding = ActivityItemViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        window.statusBarColor = getColor(R.color.primary)
 
         // Restore previous state or set initial UI state
         currentState = savedInstanceState?.getString(MODEL_KEY)
@@ -84,6 +87,9 @@ class ItemViewActivity : AppCompatActivity() {
 
     private fun initializeUI() {
         // Set up UI elements
+        binding.itemBuyButton.backgroundTintList = ContextCompat.getColorStateList(this, R.color.primary)
+        binding.contactSellerButton.backgroundTintList = ContextCompat.getColorStateList(this, R.color.primary)
+
         binding.backButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

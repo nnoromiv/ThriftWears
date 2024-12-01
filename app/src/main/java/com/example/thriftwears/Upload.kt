@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,14 +11,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.thriftwears.databinding.UploadBinding
-import com.example.thriftwears.item.UploadedImagesItemClass
+import com.example.thriftwears.item.ProductItem
+import com.example.thriftwears.item.UploadedImagesItem
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 
 class Upload : Fragment() {
@@ -27,28 +30,18 @@ class Upload : Fragment() {
     private var _binding: UploadBinding? = null
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
-    private lateinit var imageVieww: ImageView
+    private val storage = Firebase.storage("gs://thriftwears-78671.firebasestorage.app")
+    private val db = com.google.firebase.Firebase.firestore
 
-    private val categories = listOf("Option 1", "Option 2", "Option 3")
-
-    private val img = Uri.parse("https://images.unsplash.com/photo-1730727384555-35318cb80600?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D")
-    private val img1 = Uri.parse("https://images.unsplash.com/uploads/141104078198192352262/c9aa631b?q=80&w=1746&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-    private val img2 = Uri.parse("https://images.unsplash.com/photo-1500531359996-c89a0e63e49c?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-    private val img3 = Uri.parse("https://plus.unsplash.com/premium_photo-1693243521806-ec8ddb5c4581?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-    private val img4 = Uri.parse("https://plus.unsplash.com/premium_photo-1722859221349-26353eae4744?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZG9nfGVufDB8fDB8fHww")
+    private val categories = listOf("Local", "Festive", "Fashion")
 
     private var moreImagesList = mutableListOf(
-        UploadedImagesItemClass(
-            null,
-            null,
-            null,
-            null,
-            null
-        ),
+        UploadedImagesItem(null),
     )
 
     companion object{
-        val IMAGE_REQUEST_CODE = 100
+        const val IMAGE_REQUEST_CODE = 100
+        private const val TAG = "UPLOAD"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +55,7 @@ class Upload : Fragment() {
         if (currentUser == null) {
             updateUI()
         } else {
-            Log.d("UPLOAD", "User is signed in: $currentUser.uid")
+            Log.d(TAG, "User is signed in: $currentUser.uid")
         }
     }
 
@@ -94,7 +87,6 @@ class Upload : Fragment() {
 
             // List of image URIs and corresponding views
             val imageUris = listOf(currentItem.image2, currentItem.image3, currentItem.image4, currentItem.image5)
-            val imageViews = listOf(binding.image2, binding.image3, binding.image4, binding.image5)
 
             // Iterate through image URIs and views, loading or hiding as needed
             imageUris.forEachIndexed { index, uri ->
@@ -108,7 +100,8 @@ class Upload : Fragment() {
                     imageViews[index].visibility = View.VISIBLE
 
                     imageViews[index].setOnClickListener {
-                        swapImages(index + 1, currentItem) // Index + 1 because image1 is primary
+                        Log.d(TAG, "Image $index clicked")
+                        swapImages(index + 1, currentItem)
                     }
                 } else {
                     imageViews[index].visibility = View.GONE
@@ -122,7 +115,7 @@ class Upload : Fragment() {
             binding.image4.visibility = View.GONE
             binding.image5.visibility = View.GONE
 
-            Log.e("UPLOAD", "No images to display in moreImagesList.")
+            Log.e(TAG, "No images to display in moreImagesList.")
         }
 
         return binding.root
@@ -145,14 +138,51 @@ class Upload : Fragment() {
         }
 
         binding.uploadButton.setOnClickListener {
+            val uploadTasks = mutableListOf<Task<Uri>>()
             val title = binding.uploadTitle.text.toString()
             val description = binding.uploadDescription.text.toString()
             val category = binding.dropdownMenu.text.toString()
+            val fileId = generateRandomId()
 
             if (!validateInput(title, description, category)) return@setOnClickListener
-            Log.d("UPLOAD", "Images: $moreImagesList")
-            Log.d("UPLOAD", "Title: $title, Description: $description, Category: $category")
+            if(moreImagesList.isEmpty()) return@setOnClickListener
+
+            val productItemData = ProductItem(
+                fileId,
+                title,
+                description,
+                category
+            )
+
+            val currentItem = moreImagesList[0]
+            val imageUris = listOf(currentItem.image1, currentItem.image2, currentItem.image3, currentItem.image4, currentItem.image5)
+            imageUris.forEachIndexed {index, uri ->
+                if(uri != null) {
+                    val uploadTask = uploadImage(fileId, index, uri, productItemData)
+                    uploadTasks.add(uploadTask)
+                }
+            }
+
+            Tasks.whenAllComplete(uploadTasks)
+                .addOnSuccessListener {
+                    saveItemToFireStore(productItemData)
+                }
         }
+
+        if (moreImagesList.isNotEmpty()) {
+            val currentItem = moreImagesList[0]
+
+            val imageViews = listOf(binding.image2, binding.image3, binding.image4, binding.image5)
+            val imageUris = listOf(currentItem.image2, currentItem.image3, currentItem.image4, currentItem.image5)
+
+            imageUris.forEachIndexed { index, _ ->
+                imageViews[index].setOnClickListener {
+                    Log.d(TAG, "Image $index clicked")
+                    swapImages(index + 1, currentItem)
+                }
+            }
+        }
+
     }
 
     override fun onDestroyView() {
@@ -170,7 +200,7 @@ class Upload : Fragment() {
 
     private fun showToast(message: String) = Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 
-    private fun swapImages(index: Int, currentItem: UploadedImagesItemClass) {
+    private fun swapImages(index: Int, currentItem: UploadedImagesItem) {
         val primaryUri = currentItem.image1
         val secondaryUri = when (index) {
             1 -> currentItem.image2
@@ -284,4 +314,69 @@ class Upload : Fragment() {
 
         return true
     }
+
+    private fun uploadImage(fileId: String, fileName:Int, filePath:Uri, productItemData: ProductItem = ProductItem()): Task<Uri> {
+        val storageRef = storage.reference
+        val imagesRef = storageRef.child("images/${auth.currentUser!!.uid}/$fileId/${fileName}.jpg")
+
+        val inputStream = try {
+            requireContext().contentResolver.openInputStream(filePath)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error opening file stream", e)
+            null
+        }
+
+        return inputStream?.let {
+            imagesRef.putStream(it)
+                .continueWithTask { task ->
+                    if (!task.isSuccessful) {
+                        throw task.exception ?: Exception("Unknown upload error")
+                    }
+                    imagesRef.downloadUrl
+                }
+                .addOnSuccessListener { uri ->
+                    showToast("Upload Success")
+                    when (fileName) {
+                        0 -> {
+                            productItemData.primaryImage = uri.toString()
+                        }
+                        1 -> {
+                            productItemData.otherImages = mutableListOf(uri.toString())
+                        }
+                        else -> {
+                            productItemData.otherImages?.add(uri.toString())
+                        }
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.e(TAG, "Error uploading image", e)
+                    showToast("Upload Failed")
+                }
+        } ?: Tasks.forException(Exception("Input stream is null"))
+    }
+
+    private fun generateRandomId(): String {
+        val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
+        return (1..10)
+            .map { allowedChars.random() }
+            .joinToString("")
+    }
+
+    private fun saveItemToFireStore(productItem: ProductItem) {
+        val uid = auth.currentUser!!.uid
+        productItem.timeStamp = com.google.firebase.Timestamp.now()
+
+        db.collection("products")
+            .document(uid)
+            .set(productItem)
+            .addOnSuccessListener { docRef ->
+                Log.d(TAG, "documentUpload:success, user: $docRef")
+                updateUI()
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error adding document", e)
+                showToast("Failed to save user data")
+            }
+    }
+
 }

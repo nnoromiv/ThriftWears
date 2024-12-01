@@ -2,7 +2,7 @@ package com.example.thriftwears.item
 
 import android.net.Uri
 
-data class UploadedImagesItemClass(
+data class UploadedImagesItem(
     var image1: Uri? = null,
     var image2: Uri? = null,
     var image3: Uri? = null,

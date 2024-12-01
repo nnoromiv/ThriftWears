@@ -6,15 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thriftwears.ItemViewActivity
 import com.example.thriftwears.databinding.CardViewBinding
-import com.example.thriftwears.item.CardViewItemClass
+import com.example.thriftwears.item.CardViewItem
 import com.squareup.picasso.Picasso
 
 class CardViewAdapter(
-    private val items: List<CardViewItemClass>
+    private val items: List<CardViewItem>
 ) : RecyclerView.Adapter<CardViewAdapter.CardViewHolder>() {
 
     inner class CardViewHolder(private val binding: CardViewBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(cardViewItem: CardViewItemClass) {
+        fun bind(cardViewItem: CardViewItem) {
             binding.name.text = cardViewItem.title
             Picasso.get()
                 .load(cardViewItem.image.toString())

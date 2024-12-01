@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.thriftwears.databinding.ProfileBinding
-import com.example.thriftwears.item.UserItemClass
+import com.example.thriftwears.item.UserItem
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
@@ -25,7 +25,7 @@ class Profile : Fragment() {
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
     private val db = com.google.firebase.Firebase.firestore
-    private var userItemClassData = UserItemClass()
+    private var userItemClassData = UserItem()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +68,7 @@ class Profile : Fragment() {
         docRef.get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
-                    userItemClassData = document.toObject(UserItemClass::class.java)!!
+                    userItemClassData = document.toObject(UserItem::class.java)!!
 
                     val fullName = "${userItemClassData.firstName ?: ""} ${userItemClassData.lastName ?: ""}".trim()
                     binding.profileBar.findViewById<TextView>(R.id.fullName)?.text = fullName

@@ -24,7 +24,7 @@
         android:textSize="15sp"
         android:textStyle="bold"
         app:drawableStartCompat="@drawable/left"
-        android:drawableTint="@color/white"/>
+        app:drawableTint="@color/white"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -224,7 +224,6 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_weight="0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/already_have_an_account"
@@ -236,7 +235,7 @@
                 android:id="@+id/goToLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
                 android:text="@string/log_in"
                 android:textAlignment="center"
                 android:textColor="@color/primary"
