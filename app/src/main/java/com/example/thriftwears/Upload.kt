@@ -363,20 +363,22 @@ class Upload : Fragment() {
     }
 
     private fun saveItemToFireStore(productItem: ProductItem) {
-        val uid = auth.currentUser!!.uid
+        productItem.meta!!.createdBy = auth.currentUser!!.uid
         productItem.timeStamp = com.google.firebase.Timestamp.now()
 
-        db.collection("products")
-            .document(uid)
-            .set(productItem)
-            .addOnSuccessListener { docRef ->
-                Log.d(TAG, "documentUpload:success, user: $docRef")
-                updateUI()
-            }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
-                showToast("Failed to save user data")
-            }
+        productItem.fileId?.let {
+            db.collection("products")
+                .document(it)
+                .set(productItem)
+                .addOnSuccessListener { docRef ->
+                    Log.d(TAG, "documentUpload:success, user: $docRef")
+                    updateUI()
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error adding document", e)
+                    showToast("Failed to save user data")
+                }
+        }
     }
 
 }

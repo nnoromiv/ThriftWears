@@ -1,17 +1,30 @@
 package com.example.thriftwears
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.thriftwears.adapter.CartAdapter
+import com.example.thriftwears.components.EmptyCart
 import com.example.thriftwears.databinding.ActivityMainBinding
+import com.example.thriftwears.item.CartItem
+import com.example.thriftwears.viewmodel.GlobalCartViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var currentFragmentTag: String? = null
+    private val globalCartViewModel : GlobalCartViewModel by viewModels()
+
 
     companion object {
         private const val MODEL_KEY = "MODEL_KEY"
@@ -39,24 +52,31 @@ class MainActivity : AppCompatActivity() {
 
         currentFragmentTag = savedInstanceState?.getString(MODEL_KEY)
         if (currentFragmentTag == null) {
-            replaceFragment(this, Home(), Home::class.java.simpleName)
+            replaceFragment(this, Home(globalCartViewModel), Home::class.java.simpleName)
         } else {
-            val fragment = supportFragmentManager.findFragmentByTag(currentFragmentTag) ?: Home()
+            val fragment = supportFragmentManager.findFragmentByTag(currentFragmentTag) ?: Home(globalCartViewModel)
             replaceFragment(this, fragment, currentFragmentTag!!)
+        }
+
+        val cartData = intent.getParcelableArrayListExtra<CartItem> ("cart_data")
+        if (cartData != null) {
+            globalCartViewModel.clearCart()
+            for (item in cartData) {
+                globalCartViewModel.addItem(item)
+            }
         }
 
         // Set up bottom navigation item selection
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             val selectedFragment = when (item.itemId) {
-                R.id.home -> Home()
-                R.id.profile -> Profile()
-                R.id.search -> Search()
+                R.id.home -> Home(globalCartViewModel)
+                R.id.profile -> Profile(globalCartViewModel)
+                R.id.search -> Search(globalCartViewModel)
                 R.id.wish_list -> Saved()
                 R.id.upload -> Upload()
                 else -> return@setOnItemSelectedListener false
             }
 
-            // Toggle BottomNavigationView visibility
             binding.bottomNavigationView.visibility =
                 if (item.itemId == R.id.upload) View.GONE else View.VISIBLE
 

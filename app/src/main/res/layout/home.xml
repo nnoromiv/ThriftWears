@@ -18,30 +18,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- HomeBar Component -->
-        <com.example.thriftwears.home.HomeBar
-            android:id="@+id/homeBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- HomeSearchBar Component -->
-        <com.example.thriftwears.components.SearchBar
-            android:id="@+id/homeSearchBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- Horizontal Scrollable ChipGroup -->
-        <com.example.thriftwears.home.Chips
-            android:id="@+id/homeChips"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- Home Body-->
-        <com.example.thriftwears.home.HomeBody
-            android:id="@+id/homeBody"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
     </LinearLayout>
 
 </ScrollView>

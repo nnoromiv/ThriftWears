@@ -20,12 +20,6 @@
         android:clipToPadding="false"
         tools:listitem="@layout/card_view" />
 
-    <com.example.thriftwears.components.Title
-        android:id="@+id/amazonTitle"
-        android:layout_margin="2dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/amazonRecyclerView"
         android:layout_width="match_parent"

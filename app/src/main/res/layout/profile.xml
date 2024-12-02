@@ -11,17 +11,12 @@
     android:paddingTop="20dp"
     tools:context=".Profile">
 
-    <com.example.thriftwears.profile.ProfileBar
-        android:id="@+id/profileBar"
+    <LinearLayout
+        android:id="@+id/profileLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:orientation="vertical">
 
-    <com.example.thriftwears.profile.ProfileBody
-        android:id="@+id/profileBody"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="72dp"
-        />
+    </LinearLayout>
 
 </FrameLayout>

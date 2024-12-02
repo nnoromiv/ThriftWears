@@ -8,8 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import com.example.thriftwears.databinding.SearchBinding
+import com.example.thriftwears.viewmodel.GlobalCartViewModel
+import java.util.ArrayList
 
-class Search : Fragment() {
+class Search(
+    private val globalCartViewModel: GlobalCartViewModel
+) : Fragment() {
 
     private var _binding: SearchBinding? = null
     private val binding get() = _binding!!
@@ -27,6 +31,8 @@ class Search : Fragment() {
 
         binding.cartButton.setOnClickListener {
             val intent = Intent(requireContext(), CartActivity::class.java)
+            val cartData = globalCartViewModel.items.value
+            intent.putParcelableArrayListExtra("cart_data", cartData?.let { it1 -> ArrayList(it1) })
             requireContext().startActivity(intent)
         }
     }

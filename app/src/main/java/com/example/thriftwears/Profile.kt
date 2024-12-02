@@ -11,7 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.thriftwears.databinding.ProfileBinding
+import com.example.thriftwears.home.HomeBar
 import com.example.thriftwears.item.UserItem
+import com.example.thriftwears.profile.ProfileBar
+import com.example.thriftwears.profile.ProfileBody
+import com.example.thriftwears.viewmodel.GlobalCartViewModel
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
@@ -19,7 +23,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.firestore
 import java.util.Date
 
-class Profile : Fragment() {
+class Profile(
+    private val globalCartViewModel: GlobalCartViewModel
+) : Fragment() {
 
     private var _binding: ProfileBinding? = null
     private val binding get() = _binding!!
@@ -47,6 +53,13 @@ class Profile : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = ProfileBinding.inflate(inflater, container, false)
+
+        val profileBar = ProfileBar(requireContext(), null, 0, globalCartViewModel)
+        binding.profileLayout.addView(profileBar)
+
+        val profileBody = ProfileBody(requireContext(), null, 0)
+        binding.profileLayout.addView(profileBody)
+
         return binding.root
     }
 
@@ -71,10 +84,11 @@ class Profile : Fragment() {
                     userItemClassData = document.toObject(UserItem::class.java)!!
 
                     val fullName = "${userItemClassData.firstName ?: ""} ${userItemClassData.lastName ?: ""}".trim()
-                    binding.profileBar.findViewById<TextView>(R.id.fullName)?.text = fullName
+                    binding.profileLayout.findViewById<TextView>(R.id.fullName)?.text = fullName
 
                     val memberSince = userItemClassData.timeStamp?.let { memberDate(it) }
-                    binding.profileBar.findViewById<TextView>(R.id.memberSince)?.text = memberSince
+                    Log.d("PROFILE", "Member Since: $memberSince")
+                    binding.profileLayout.findViewById<TextView>(R.id.memberSince)?.text = memberSince
                 } else {
                     Log.d("PROFILE", "No such document found for UID: $uid")
                 }
@@ -86,7 +100,6 @@ class Profile : Fragment() {
 
     private fun memberDate(timestamp: Timestamp): String {
         val date = Date(timestamp.seconds * 1000)
-        // Define the output format for the desired output
         val outputFormat = SimpleDateFormat("MMM. yyyy", ULocale.ENGLISH)
 
         return "Member since" + " " + outputFormat.format(date)

@@ -3,6 +3,7 @@ package com.example.thriftwears
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -13,8 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thriftwears.adapter.CartAdapter
 import com.example.thriftwears.databinding.ActivityCartBinding
+import com.example.thriftwears.viewmodel.GlobalCartViewModel
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.example.thriftwears.item.CartItem
-import com.example.thriftwears.viewmodel.GlobalCart
+import java.util.ArrayList
 
 class CartActivity : AppCompatActivity() {
 
@@ -24,7 +28,7 @@ class CartActivity : AppCompatActivity() {
     private lateinit var cartRecyclerView: RecyclerView
     private lateinit var totalPriceTextView: TextView
     private lateinit var cartAdapter: CartAdapter
-    private val globalCartViewModel = GlobalCart()
+    private val globalCartViewModel : GlobalCartViewModel by viewModels()
 
     companion object {
         private const val MODEL_KEY = "MODEL_KEY"
@@ -44,6 +48,35 @@ class CartActivity : AppCompatActivity() {
         if (currentState == null) {
             initializeUI()
         }
+
+        val cartData = intent.getParcelableArrayListExtra<CartItem> ("cart_data")
+
+        if (cartData!!.isNotEmpty()) {
+            binding.emptyCart.visibility = View.GONE
+
+            for (item in cartData) {
+                globalCartViewModel.addItem(item)
+            }
+
+            cartRecyclerView = findViewById(R.id.cartRecyclerView)
+            totalPriceTextView = findViewById(R.id.totalPriceTextView)
+
+            globalCartViewModel.items.observe(this, Observer { cartItems ->
+
+                cartAdapter = CartAdapter(cartItems) { _, _ ->
+                    updateTotalPrice(cartItems)
+                    Log.d("CART", "Adding item to cart: $cartItems")
+                }
+
+                cartRecyclerView.adapter = cartAdapter
+                cartRecyclerView.layoutManager = LinearLayoutManager(this)
+
+                updateTotalPrice(cartItems)
+            })
+        } else {
+            binding.emptyCart.visibility = View.VISIBLE
+        }
+
     }
 
     private fun initializeUI() {
@@ -51,30 +84,11 @@ class CartActivity : AppCompatActivity() {
 
         binding.backToLogin.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
+            val cartData = globalCartViewModel.items.value
+            intent.putParcelableArrayListExtra("cart_data", cartData?.let { it1 -> ArrayList(it1) })
             this.startActivity(intent)
         }
 
-        cartRecyclerView = findViewById(R.id.cartRecyclerView)
-        totalPriceTextView = findViewById(R.id.totalPriceTextView)
-
-        // Sample data
-        globalCartViewModel.addItem(CartItem("1", "Item 1", 10.0, 1))
-        globalCartViewModel.addItem(CartItem("2", "Item 2", 15.0, 2))
-
-        cartAdapter = CartAdapter(globalCartViewModel.items.value!!) { _, _ ->
-            updateTotalPrice()
-        }
-
-        cartRecyclerView.adapter = cartAdapter
-        cartRecyclerView.layoutManager = LinearLayoutManager(this)
-
-        updateTotalPrice()
-
-        if(globalCartViewModel.items.value!!.isEmpty()){
-            binding.emptyCart.visibility = View.VISIBLE
-        } else {
-            binding.emptyCart.visibility = View.GONE
-        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -83,8 +97,8 @@ class CartActivity : AppCompatActivity() {
     }
 
     @SuppressLint("DefaultLocale")
-    private fun updateTotalPrice() {
-        val totalPrice = globalCartViewModel.items.value!!.sumOf { it.price * it.quantity }
+    private fun updateTotalPrice( cartItems: MutableList<CartItem>) {
+        val totalPrice = cartItems.sumOf { it.price * it.quantity }
         getString(R.string.total, String.format("%.2f", totalPrice)).also { totalPriceTextView.text = it }
     }
 

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.thriftwears.item.CartItem
 
-class GlobalCart: ViewModel() {
+class GlobalCartViewModel: ViewModel() {
 
     private val cartItems = MutableLiveData<MutableList<CartItem>>(mutableListOf())
     val items: LiveData<MutableList<CartItem>> = cartItems
@@ -20,5 +20,9 @@ class GlobalCart: ViewModel() {
         val currentList = cartItems.value ?: mutableListOf()
         currentList.remove(item)
         cartItems.value = currentList
+    }
+
+    fun clearCart() {
+        cartItems.value = mutableListOf()
     }
 }
