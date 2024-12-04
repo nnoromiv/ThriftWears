@@ -37,10 +37,7 @@ class CardViewAdapter(
             }
             binding.image.setOnClickListener{
                 val intent = Intent(binding.root.context, ItemViewActivity::class.java)
-                intent.putExtra("name", cardViewItem.title)
-                intent.putExtra("image", cardViewItem.primaryImage.toString())
-                intent.putExtra("price", cardViewItem.price.toString())
-                intent.putExtra("description", cardViewItem.description)
+                intent.putExtra("fileId", cardViewItem.fileId)
 
                 binding.root.context.startActivity(intent)
             }

@@ -110,7 +110,27 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signUpPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:backgroundTint="@color/lightGrey"
+                android:background="@drawable/grey_rounded_button"
+                android:hint="Phone Number"
+                android:inputType="phone"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                app:drawableEndCompat="@drawable/user" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >

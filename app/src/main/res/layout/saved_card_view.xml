@@ -71,6 +71,25 @@
                     android:textSize="16sp"
                     tools:text="Short description of the item." />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/savedButton"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:tint="@color/black"
+                        android:background="@android:color/transparent"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/cart"
+                        android:src="@drawable/saved_solid"
+                        />
+
+
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>

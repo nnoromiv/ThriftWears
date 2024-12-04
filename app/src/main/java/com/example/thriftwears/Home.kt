@@ -12,6 +12,7 @@ import com.example.thriftwears.home.Chips
 import com.example.thriftwears.home.HomeBar
 import com.example.thriftwears.home.HomeBody
 import com.example.thriftwears.viewmodel.GlobalCartViewModel
+import com.google.android.material.chip.Chip
 
 class Home(
     private val globalCartViewModel: GlobalCartViewModel
@@ -37,10 +38,10 @@ class Home(
         val searchBar = SearchBar(requireContext(), null, 0)
         binding.homeLayout.addView(searchBar)
 
-        val chips = Chips(requireContext(), null, 0)
+        val chips = Chips(requireContext(), null, 0, globalCartViewModel)
         binding.homeLayout.addView(chips)
 
-        val homeBody = HomeBody(requireContext(), null, 0, globalCartViewModel)
+        val homeBody = HomeBody(requireContext(), null, 0, globalCartViewModel, chips)
         binding.homeLayout.addView(homeBody)
     }
 

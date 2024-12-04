@@ -204,7 +204,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/uploadDescription"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="100dp"
                     android:background="@color/lightGrey"
                     android:gravity="top"
                     android:hint="@string/describe_this_item"
@@ -245,6 +245,37 @@
                     app:drawableRightCompat="@drawable/dropdown" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:gravity="start"
+                android:text="Price"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:backgroundTint="@color/white"
+                android:paddingVertical="1dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/uploadPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/grey_rounded_button"
+                    android:hint="Item Price"
+                    android:inputType="text|textAutoComplete|textAutoCorrect"
+                    android:maxWidth="320dp"
+                    android:maxLength="80"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/uploadButton"

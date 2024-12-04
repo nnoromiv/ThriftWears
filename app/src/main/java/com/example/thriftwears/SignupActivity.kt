@@ -99,9 +99,10 @@ class SignupActivity : AppCompatActivity() {
             val firstName = binding.signUpFirstName.text.toString()
             val lastName = binding.signUpLastName.text.toString()
             val email = binding.signUpEmail.text.toString()
+            val phoneNumber = binding.signUpPhoneNumber.text.toString()
             val password = binding.signUpPassword.text.toString()
 
-            if (!validateInput(firstName, lastName, email, password)) return@setOnClickListener
+            if (!validateInput(firstName, lastName, email, phoneNumber, password)) return@setOnClickListener
 
             binding.createAccountButton.isEnabled = false
             binding.progressBar.visibility = android.view.View.VISIBLE
@@ -110,6 +111,7 @@ class SignupActivity : AppCompatActivity() {
                 email,
                 firstName,
                 lastName,
+                phoneNumber
             )
 
             createFirebaseUser(email, password, userItemClassData)
@@ -117,15 +119,22 @@ class SignupActivity : AppCompatActivity() {
 
     }
 
-    private fun validateInput(firstName: String, lastName: String, email: String, password: String): Boolean {
-        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
+    private fun validateInput(firstName: String, lastName: String, email: String, phoneNumber: String, password: String): Boolean {
+        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || password.isEmpty()) {
             showToast("All fields are required")
             return false
         }
+
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             showToast("Invalid email format")
             return false
         }
+
+        if (!phoneNumber.matches(Regex("^\\+\\d{10,15}$"))) {
+            showToast("Invalid phone number format: Ensure it starts with '+' and has country code")
+            return false
+        }
+
         if (password.length < 6) {
             showToast("Password must be at least 6 characters")
             return false

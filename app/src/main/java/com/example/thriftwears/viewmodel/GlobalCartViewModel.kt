@@ -1,11 +1,13 @@
 package com.example.thriftwears.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.thriftwears.item.CartItem
 
-class GlobalCartViewModel: ViewModel() {
+class GlobalCartViewModel(application: Application) : AndroidViewModel(application) {
 
     private val cartItems = MutableLiveData<MutableList<CartItem>>(mutableListOf())
     val items: LiveData<MutableList<CartItem>> = cartItems

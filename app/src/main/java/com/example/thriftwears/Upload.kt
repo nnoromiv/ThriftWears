@@ -33,7 +33,7 @@ class Upload : Fragment() {
     private val storage = Firebase.storage("gs://thriftwears-78671.firebasestorage.app")
     private val db = com.google.firebase.Firebase.firestore
 
-    private val categories = listOf("Local", "Festive", "Fashion")
+    private val categories = listOf("Men", "Women")
 
     private var moreImagesList = mutableListOf(
         UploadedImagesItem(null),
@@ -128,6 +128,20 @@ class Upload : Fragment() {
         val adapter = ArrayAdapter(this.requireContext(), R.layout.dropdown_item, categories)
         dropdownMenu.setAdapter(adapter)
 
+        if (moreImagesList.isNotEmpty()) {
+            val currentItem = moreImagesList[0]
+
+            val imageViews = listOf(binding.image2, binding.image3, binding.image4, binding.image5)
+            val imageUris = listOf(currentItem.image2, currentItem.image3, currentItem.image4, currentItem.image5)
+
+            imageUris.forEachIndexed { index, _ ->
+                imageViews[index].setOnClickListener {
+                    Log.d(TAG, "Image $index clicked")
+                    swapImages(index + 1, currentItem)
+                }
+            }
+        }
+
         binding.closeButton.setOnClickListener {
             val intent = Intent(this.context, MainActivity::class.java)
             startActivity(intent)
@@ -141,17 +155,22 @@ class Upload : Fragment() {
             val uploadTasks = mutableListOf<Task<Uri>>()
             val title = binding.uploadTitle.text.toString()
             val description = binding.uploadDescription.text.toString()
-            val category = binding.dropdownMenu.text.toString()
+            val category = binding.dropdownMenu.text.toString().lowercase()
+            val price = binding.uploadPrice.text.toString()
             val fileId = generateRandomId()
 
-            if (!validateInput(title, description, category)) return@setOnClickListener
+            if (!validateInput(title, description, category, price)) return@setOnClickListener
             if(moreImagesList.isEmpty()) return@setOnClickListener
 
             val productItemData = ProductItem(
                 fileId,
                 title,
                 description,
-                category
+                category,
+                null,
+                null,
+                null,
+                price.toDouble(),
             )
 
             val currentItem = moreImagesList[0]
@@ -169,20 +188,6 @@ class Upload : Fragment() {
                 }
         }
 
-        if (moreImagesList.isNotEmpty()) {
-            val currentItem = moreImagesList[0]
-
-            val imageViews = listOf(binding.image2, binding.image3, binding.image4, binding.image5)
-            val imageUris = listOf(currentItem.image2, currentItem.image3, currentItem.image4, currentItem.image5)
-
-            imageUris.forEachIndexed { index, _ ->
-                imageViews[index].setOnClickListener {
-                    Log.d(TAG, "Image $index clicked")
-                    swapImages(index + 1, currentItem)
-                }
-            }
-        }
-
     }
 
     override fun onDestroyView() {
@@ -192,7 +197,6 @@ class Upload : Fragment() {
     }
 
     private fun updateUI() {
-        // Navigate to LoginActivity and finish the parent activity
         val intent = Intent(requireContext(), LoginActivity::class.java)
         startActivity(intent)
         requireActivity().finish()
@@ -250,7 +254,6 @@ class Upload : Fragment() {
     private fun pickFromGallery(){
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
-//        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         startActivityForResult(intent, IMAGE_REQUEST_CODE)
     }
 
@@ -296,8 +299,8 @@ class Upload : Fragment() {
         }
     }
 
-    private fun validateInput(title: String, description: String, category: String): Boolean {
-        if (title.isEmpty() || description.isEmpty() || category.isEmpty()) {
+    private fun validateInput(title: String, description: String, category: String, price: String): Boolean {
+        if (title.isEmpty() || description.isEmpty() || category.isEmpty() || price.isEmpty()) {
             showToast("All fields are required")
             return false
         }
@@ -365,6 +368,8 @@ class Upload : Fragment() {
     private fun saveItemToFireStore(productItem: ProductItem) {
         productItem.meta!!.createdBy = auth.currentUser!!.uid
         productItem.timeStamp = com.google.firebase.Timestamp.now()
+        productItem.meta!!.createdAt = com.google.firebase.Timestamp.now().toString()
+        productItem.sku = generateRandomId()
 
         productItem.fileId?.let {
             db.collection("products")

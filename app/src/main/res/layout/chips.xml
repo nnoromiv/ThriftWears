@@ -8,6 +8,7 @@
     android:scrollbars="none">
 
     <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -25,7 +26,7 @@
             app:chipStartPadding="12dp" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/localChip"
+            android:id="@+id/menChip"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,11 +35,11 @@
             app:chipEndPadding="12dp"
             app:checkedIconVisible="false"
             android:textColor="@color/black"
-            android:text="@string/local"
+            android:text="Men"
              />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/festiveChip"
+            android:id="@+id/womenChip"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,22 +48,8 @@
             app:chipEndPadding="12dp"
             app:checkedIconVisible="false"
             android:textColor="@color/black"
-            android:text="@string/festive"
+            android:text="Women"
              />
-
-        <!-- Additional Chips -->
-        <com.google.android.material.chip.Chip
-            android:id="@+id/fashionChip"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:chipBackgroundColor="@color/lightGrey"
-            app:chipStartPadding="12dp"
-            app:chipEndPadding="12dp"
-            app:checkedIconVisible="false"
-            android:textColor="@color/black"
-            android:text="@string/fashion"
-            />
 
     </com.google.android.material.chip.ChipGroup>
 </HorizontalScrollView>
