@@ -11,11 +11,12 @@ android {
     defaultConfig {
         applicationId = "com.nnorom.thriftwears"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        applicationIdSuffix = "trw"
     }
 
     buildTypes {
@@ -60,7 +61,7 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.picasso)
 
-    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
@@ -68,5 +69,5 @@ dependencies {
     implementation ("com.google.code.gson:gson:2.11.0")
     implementation ("com.paypal.android:paypal-web-payments:2.0.0-beta1")
     implementation ("com.paypal.android:payment-buttons:2.0.0-beta1")
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 }

@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.nnorom.thriftwears" />
+                  <option name="mobileSdkAppId" value="1:1046465020051:android:2d8ad968da6e51b7964d66" />
+                  <option name="projectId" value="thriftwears-78671" />
+                  <option name="projectNumber" value="1046465020051" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
