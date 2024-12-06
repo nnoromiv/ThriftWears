@@ -83,6 +83,7 @@ class CartActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
+        @Suppress("DEPRECATION")
         window.statusBarColor = getColor(R.color.primary)
 
         currentState = savedInstanceState?.getString(MODEL_KEY)

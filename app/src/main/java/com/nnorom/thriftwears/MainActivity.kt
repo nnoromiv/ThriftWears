@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
+        @Suppress("DEPRECATION")
         window.statusBarColor = getColor(R.color.primary)
 
         currentFragmentTag = savedInstanceState?.getString(MODEL_KEY)

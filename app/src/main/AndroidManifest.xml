@@ -57,6 +57,7 @@
 
         <activity
             android:name=".LoginActivity"
+            android:theme="@style/Base.Theme.ThriftWears"
             android:windowSoftInputMode="adjustResize">
 
         </activity>

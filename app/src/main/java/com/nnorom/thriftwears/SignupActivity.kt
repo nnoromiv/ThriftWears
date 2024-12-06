@@ -49,6 +49,7 @@ class SignupActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        @Suppress("DEPRECATION")
         window.statusBarColor = getColor(R.color.primary)
 
         // Restore previous state or set initial UI state

@@ -51,6 +51,7 @@ class ItemViewActivity : AppCompatActivity() {
         setContentView(binding.root)
         auth = Firebase.auth
 
+        @Suppress("DEPRECATION")
         window.statusBarColor = getColor(R.color.primary)
 
         // Restore previous state or set initial UI state

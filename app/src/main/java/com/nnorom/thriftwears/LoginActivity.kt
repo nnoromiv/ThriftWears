@@ -40,6 +40,8 @@ class LoginActivity : AppCompatActivity() {
 
         // Enable edge-to-edge layout
         enableEdgeToEdge()
+
+        @Suppress("DEPRECATION")
         window.statusBarColor = getColor(R.color.primary)
 
         // Inflate layout with ViewBinding

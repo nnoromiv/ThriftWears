@@ -9,4 +9,5 @@
     <color name="light_blue_600">#FF039BE5</color>
     <color name="gray_400">#757575</color>
     <color name="gray_600">#616161</color>
+    <color name="colorPrimaryDark">#333337</color>
 </resources>
