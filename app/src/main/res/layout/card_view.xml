@@ -31,6 +31,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:clipToOutline="true"
+                tools:targetApi="34"
                 android:contentDescription="@string/item_image"
                 android:background="@drawable/rounded_corners"
                 />
@@ -45,7 +46,7 @@
             <!-- Name TextView -->
            <LinearLayout
                android:layout_width="match_parent"
-               android:layout_height="wrap_content"
+               android:layout_height="match_parent"
                android:layout_gravity="center"
                android:gravity="center_vertical"
                android:orientation="horizontal">
@@ -57,6 +58,7 @@
                    android:layout_height="wrap_content"
                    android:textColor="@android:color/black"
                    android:textSize="18sp"
+                   android:fontFamily="@font/century_gothic"
                    android:layout_marginBottom="4dp"
                    tools:text="Item Name" />
 
@@ -66,6 +68,7 @@
                    android:layout_width="28dp"
                    android:layout_height="28dp"
                    android:textSize="18sp"
+                   android:contentDescription="@string/add_to_cart"
                    android:layout_marginBottom="4dp"
                    android:src="@drawable/cart"
                    />
@@ -80,6 +83,7 @@
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
+                android:fontFamily="@font/century_gothic"
                 android:layout_marginBottom="4dp"
                 tools:text="£20.00" />
 
@@ -90,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
+                android:fontFamily="@font/century_gothic"
                 tools:text="Short description of the item." />
 
             </LinearLayout>

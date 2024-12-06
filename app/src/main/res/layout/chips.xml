@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:text="@string/saved"
             android:textColor="@color/black"
+            android:fontFamily="@font/century_gothic"
             app:checkedIconVisible="false"
             app:chipBackgroundColor="@color/lightGrey"
             app:chipEndPadding="12dp"
@@ -35,7 +36,8 @@
             app:chipEndPadding="12dp"
             app:checkedIconVisible="false"
             android:textColor="@color/black"
-            android:text="Men"
+            android:fontFamily="@font/century_gothic"
+            android:text="@string/men"
              />
 
         <com.google.android.material.chip.Chip
@@ -48,7 +50,8 @@
             app:chipEndPadding="12dp"
             app:checkedIconVisible="false"
             android:textColor="@color/black"
-            android:text="Women"
+            android:fontFamily="@font/century_gothic"
+            android:text="@string/women"
              />
 
     </com.google.android.material.chip.ChipGroup>

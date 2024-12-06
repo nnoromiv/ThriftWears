@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ThriftWears</string>
+    <string name="app_name">Thrift Wears</string>
     <string name="home">Home</string>
     <string name="wish_list">Wish List</string>
     <string name="search">Search</string>
@@ -59,7 +59,21 @@
     <string name="item_title">Item Title</string>
     <string name="description">Description</string>
     <string name="describe_this_item">Describe this item</string>
-    <string name="welcome_to_thriftwears">Welcome to ThriftWears</string>
+    <string name="welcome_to_thriftwears">Welcome to Thrift Wears</string>
     <string name="total">Total: £%1$s</string>
     <string name="contact_seller">Contact Seller</string>
+    <string name="cart_title">Cart</string>
+    <string name="save_item">Save Item</string>
+    <string name="payment">Payment</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="item_name">Item Name</string>
+    <string name="_0_00">£0.00</string>
+    <string name="_1">1</string>
+    <string name="men">Men</string>
+    <string name="women">Women</string>
+    <string name="empty_cart">Empty Cart</string>
+    <string name="nothing_to_see_here">Nothing to see here</string>
+    <string name="price">Price</string>
+    <string name="item_price">Item Price</string>
 </resources>

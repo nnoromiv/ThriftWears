@@ -33,6 +33,7 @@
             android:layout_width="match_parent"
             android:textSize="15sp"
             android:textColor="@color/white"
+            android:fontFamily="@font/century_gothic"
             android:textStyle="bold"
             tools:text="John Doe"
             />
@@ -41,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:textSize="12sp"
+            android:fontFamily="@font/century_gothic"
             android:textColor="@color/lightGrey"
             tools:text="@string/member_since_2024"
             android:textStyle="normal"/>

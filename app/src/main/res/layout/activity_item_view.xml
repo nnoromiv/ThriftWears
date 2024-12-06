@@ -41,6 +41,7 @@
             android:layout_weight="1"
             android:gravity="end|center_vertical"
             android:text="@string/item_details"
+            android:fontFamily="@font/century_gothic"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -81,6 +82,7 @@
                     android:scaleType="fitCenter"
                     android:clipToOutline="true"
                     tools:src="@drawable/avatar"
+                    tools:targetApi="35"
                     android:contentDescription="@string/item_image"
                     android:background="@drawable/rounded_corners"
                     />
@@ -117,15 +119,17 @@
                             android:layout_height="wrap_content"
                             android:textColor="@android:color/black"
                             android:textSize="18sp"
+                            android:fontFamily="@font/century_gothic"
                             android:layout_marginBottom="4dp"
                             tools:text="Item Name" />
 
                         <ImageButton
                             android:id="@+id/savedButton"
                             android:layout_weight="0"
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:textSize="18sp"
+                            android:contentDescription="@string/save_item"
                             android:background="@color/white"
                             android:layout_marginBottom="4dp"
                             android:src="@drawable/saved"
@@ -141,6 +145,7 @@
                         android:textStyle="bold"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
+                        android:fontFamily="@font/century_gothic"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="4dp"
                         tools:text="£20.00" />
@@ -152,6 +157,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textSize="12sp"
+                        android:fontFamily="@font/century_gothic"
                         android:textStyle="bold"
                         android:textColorHint="@color/black"
                         tools:text="Free delivery in 2-3 days" />
@@ -169,6 +175,7 @@
                         android:layout_weight="1"
                         android:layout_height="48dp"
                         android:backgroundTint="@color/primary"
+                        android:fontFamily="@font/century_gothic"
                         android:paddingHorizontal="5dp"
                         android:text="@string/buy_now"
                         android:textColor="@color/white"
@@ -182,6 +189,7 @@
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    android:fontFamily="@font/century_gothic"
                     android:layout_margin="5dp"
                     tools:text="Item Description" />
 
@@ -192,20 +200,22 @@
                     android:textColor="@android:color/black"
                     android:textSize="12sp"
                     android:layout_margin="5dp"
-                    tools:text="Native lyres finds by on to. Land memory have it now climes delight the. To departed delight to if the ancient delight, heart stalked cell nor say, he den knew but save hall seemed such. Near for glorious of fabled knew. Name him high passed little might known of a,." />
+                    android:fontFamily="@font/century_gothic"
+                    tools:text="Native lyres finds by on to.  him high passed little might known of a,." />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
+                    android:fontFamily="@font/century_gothic"
                     android:textStyle="bold"
                     android:layout_margin="5dp"
                     tools:text="Seller" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal"
                     >
 
@@ -219,9 +229,9 @@
                         />
 
                     <LinearLayout
-                        android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:paddingHorizontal="10dp"
                         android:gravity="center"
                         android:orientation="vertical">
@@ -231,6 +241,7 @@
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"
                             android:textSize="15sp"
+                            android:fontFamily="@font/century_gothic"
                             android:textColor="@color/black"
                             android:textStyle="bold"
                             tools:text="John Doe"
@@ -238,12 +249,13 @@
 
                         <TextView
                             android:id="@+id/sellerYear"
-                            android:layout_height="wrap_content"
                             android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/century_gothic"
+                            android:textColor="#757575"
                             android:textSize="12sp"
-                            android:textColor="@color/gray_400"
-                            tools:text="@string/member_since_2024"
-                            android:textStyle="normal"/>
+                            android:textStyle="normal"
+                            tools:text="@string/member_since_2024" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -251,8 +263,10 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/contactSellerButton"
                     android:layout_width="match_parent"
+                    android:maxWidth="320dp"
                     android:layout_height="48dp"
                     android:backgroundTint="@color/primary"
+                    android:fontFamily="@font/century_gothic"
                     android:layout_marginVertical="5dp"
                     android:paddingHorizontal="5dp"
                     android:text="@string/contact_seller"

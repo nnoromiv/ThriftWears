@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.example.thriftwears.components.SearchBar
+        <com.nnorom.thriftwears.components.SearchBar
             android:id="@+id/searchSearchBar"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -36,12 +36,20 @@
 
     </LinearLayout>
 
-    <com.example.thriftwears.components.EmptySearch
+    <com.nnorom.thriftwears.components.EmptySearch
         android:id="@+id/emptySearchBar"
         android:layout_width="match_parent"
         android:layout_gravity="center"
         android:layout_height="match_parent"
         />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:clipToPadding="false"
+        tools:listitem="@layout/card_view" />
 
 
 </LinearLayout>

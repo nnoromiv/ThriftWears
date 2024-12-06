@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.thriftwears"
+    namespace = "com.nnorom.thriftwears"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.thriftwears"
+        applicationId = "com.nnorom.thriftwears"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -59,11 +59,14 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.recyclerview)
     implementation(libs.picasso)
+
     implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-storage")
     implementation ("com.google.code.gson:gson:2.11.0")
-
+    implementation ("com.paypal.android:paypal-web-payments:2.0.0-beta1")
+    implementation ("com.paypal.android:payment-buttons:2.0.0-beta1")
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
 }

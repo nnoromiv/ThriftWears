@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/primary"
+        android:fontFamily="@font/century_gothic"
         android:gravity="end"
         android:text="@string/create_an_account"
         android:layout_marginBottom="10dp"
@@ -36,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/let_s_get_started"
+        android:fontFamily="@font/century_gothic"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="26sp"
@@ -47,6 +49,7 @@
         android:text="@string/use_an_email_or_continue_with_social_to_create_an_account"
         android:textAlignment="textStart"
         android:textColor="@color/black"
+        android:fontFamily="@font/century_gothic"
         android:textSize="12sp" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -60,6 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:backgroundTint="@color/lightGrey"
+            android:fontFamily="@font/century_gothic"
             android:background="@drawable/grey_rounded_button"
             android:hint="@string/first_name"
             android:inputType="text"
@@ -82,6 +86,7 @@
             android:backgroundTint="@color/lightGrey"
             android:background="@drawable/grey_rounded_button"
             android:hint="@string/last_name"
+            android:fontFamily="@font/century_gothic"
             android:inputType="text"
             android:textAlignment="viewStart"
             android:textColor="@color/black"
@@ -103,6 +108,7 @@
             android:background="@drawable/grey_rounded_button"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
+            android:fontFamily="@font/century_gothic"
             android:textAlignment="viewStart"
             android:textColor="@color/black"
             app:drawableEndCompat="@drawable/user" />
@@ -121,8 +127,9 @@
                 android:layout_height="48dp"
                 android:backgroundTint="@color/lightGrey"
                 android:background="@drawable/grey_rounded_button"
-                android:hint="Phone Number"
+                android:hint="@string/phone_number"
                 android:inputType="phone"
+                android:fontFamily="@font/century_gothic"
                 android:textAlignment="viewStart"
                 android:textColor="@color/black"
                 app:drawableEndCompat="@drawable/user" />
@@ -142,6 +149,7 @@
             android:backgroundTint="@color/lightGrey"
             android:background="@drawable/grey_rounded_button"
             android:hint="@string/password"
+            android:fontFamily="@font/century_gothic"
             android:inputType="textPassword"
             android:textAlignment="viewStart"
             android:textColor="@color/black"
@@ -153,11 +161,13 @@
             android:id="@+id/togglePassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/century_gothic"
             android:gravity="end"
+            android:padding="5dp"
             android:text="@string/show_password"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="14sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -178,6 +188,7 @@
             android:paddingHorizontal="5dp"
             android:layout_marginBottom="10dp"
             android:textColor="@color/white"
+            android:fontFamily="@font/century_gothic"
             android:textStyle="bold"
             android:layout_gravity="center"
             android:text="@string/continue_with_email" />
@@ -213,6 +224,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/or"
+                android:fontFamily="@font/century_gothic"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -232,6 +244,7 @@
             android:layout_gravity="center"
             android:backgroundTint="@color/primary"
             android:textColor="@color/white"
+            android:fontFamily="@font/century_gothic"
             android:text="@string/continue_with_google"
             android:textStyle="bold"
             app:drawableEndCompat="@drawable/google" />
@@ -248,6 +261,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/already_have_an_account"
                 android:textAlignment="center"
+                android:fontFamily="@font/century_gothic"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
@@ -257,6 +271,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:text="@string/log_in"
+                android:fontFamily="@font/century_gothic"
                 android:textAlignment="center"
                 android:textColor="@color/primary"
                 android:textSize="12sp" />

@@ -11,17 +11,18 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:contentDescription="Empty Cart"
+        android:contentDescription="@string/empty_cart"
         android:src="@drawable/cart"
         app:tint="@color/gray_400"
-        />
+         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Empty Cart"
+        android:text="@string/empty_cart"
         android:textAlignment="center"
         android:textSize="24sp"
+        android:fontFamily="@font/century_gothic"
         android:textColor="@color/gray_600"
         android:textStyle="bold"
         />
@@ -29,9 +30,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nothing to see here"
+        android:text="@string/nothing_to_see_here"
         android:layout_marginTop="5dp"
         android:textAlignment="center"
+        android:fontFamily="@font/century_gothic"
         android:textSize="18sp"
         android:textColor="@color/gray_600"
         android:textStyle="normal"

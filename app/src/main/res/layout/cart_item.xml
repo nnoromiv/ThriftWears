@@ -1,5 +1,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -9,9 +10,11 @@
         android:id="@+id/itemNameTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
         android:layout_weight="2"
         android:textColor="@color/black"
-        android:text="Item Name"
+        android:fontFamily="@font/century_gothic"
+        android:text="@string/item_name"
         android:textSize="16sp"/>
 
     <TextView
@@ -21,19 +24,24 @@
         android:layout_weight="1"
         android:gravity="end"
         android:textColor="@color/black"
-        android:text="£0.00"
+        android:fontFamily="@font/century_gothic"
+        android:text="@string/_0_00"
         android:textSize="16sp"/>
 
     <EditText
         android:id="@+id/itemQuantityEditText"
         android:layout_width="50dp"
+        android:autofillHints="phone"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:inputType="number"
-        android:textColor="@color/black"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/rounded_edit_text"
+        android:fontFamily="@font/century_gothic"
         android:gravity="center"
-        android:text="1"
+        android:inputType="number"
+        android:minHeight="48dp"
         android:padding="4dp"
-        android:background="@drawable/rounded_edit_text"/>
+        android:text="@string/_1"
+        android:textColor="@color/black"
+        tools:ignore="LabelFor" />
 
 </LinearLayout>

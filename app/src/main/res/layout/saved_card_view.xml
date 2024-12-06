@@ -28,10 +28,12 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:adjustViewBounds="true"
+                android:background="@drawable/rounded_corners"
                 android:clipToOutline="true"
-                android:scaleType="centerCrop"
                 android:contentDescription="@string/item_image"
-                android:background="@drawable/rounded_corners" />
+                android:scaleType="centerCrop"
+                tools:ignore="ImageContrastCheck"
+                tools:targetApi="34" />
 
             <!-- Content Layout -->
             <LinearLayout
@@ -48,6 +50,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
+                    android:fontFamily="@font/century_gothic"
                     android:layout_marginBottom="4dp"
                     tools:text="Item Name" />
 
@@ -59,6 +62,7 @@
                     android:textStyle="bold"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
+                    android:fontFamily="@font/century_gothic"
                     android:layout_marginBottom="4dp"
                     tools:text="£20.00" />
 
@@ -69,6 +73,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
+                    android:fontFamily="@font/century_gothic"
                     tools:text="Short description of the item." />
 
                 <LinearLayout

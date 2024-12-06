@@ -16,6 +16,7 @@
         android:contentDescription="@string/item_image"
         android:background="@drawable/rounded_corners"
         tools:src="@drawable/google"
+        tools:targetApi="34"
         />
 
 </FrameLayout>

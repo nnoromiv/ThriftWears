@@ -40,6 +40,7 @@
             android:layout_weight="1"
             android:gravity="end|center_vertical"
             android:text="@string/saved_items"
+            android:fontFamily="@font/century_gothic"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />

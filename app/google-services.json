@@ -7,12 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1046465020051:android:c5dc87f806ddd081964d66",
+        "mobilesdk_app_id": "1:1046465020051:android:2d8ad968da6e51b7964d66",
         "android_client_info": {
-          "package_name": "com.example.thriftwears"
+          "package_name": "com.nnorom.thriftwears"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1046465020051-34iqq3op720kpult1j4tber7026qb73d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA88oVfEIM0FAPJ57u446Cf2w60VnPZ9I0"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1046465020051-34iqq3op720kpult1j4tber7026qb73d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

@@ -9,7 +9,8 @@
     android:id="@+id/cart_activity"
     android:background="@color/white"
     android:fitsSystemWindows="true"
-    tools:context=".CartActivity">
+    tools:context=".CartActivity"
+    tools:targetApi="34">
 
     <TextView
         android:id="@+id/backToLogin"
@@ -17,7 +18,8 @@
         android:layout_height="wrap_content"
         android:background="@color/primary"
         android:gravity="end"
-        android:text="Cart"
+        android:fontFamily="@font/century_gothic"
+        android:text="@string/cart_title"
         android:layout_marginBottom="10dp"
         android:padding="10dp"
         android:textColor="@color/white"
@@ -26,7 +28,7 @@
         app:drawableStartCompat="@drawable/left"
         app:drawableTint="@color/white"/>
 
-    <com.example.thriftwears.components.EmptyCart
+    <com.nnorom.thriftwears.components.EmptyCart
         android:id="@+id/emptyCart"
         android:layout_width="match_parent"
         android:layout_gravity="center"
@@ -39,7 +41,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -58,7 +60,8 @@
                 android:id="@+id/totalPriceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total: £0.00"
+                tools:text="Total: £0.00"
+                android:fontFamily="@font/century_gothic"
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 android:layout_gravity="end"
@@ -67,28 +70,16 @@
                 android:layout_marginTop="30dp"
                 />
 
+            <com.paypal.android.paymentbuttons.PayPalButton
+                android:id="@+id/paypal_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                />
+
         </LinearLayout>
+
     </ScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buyNowButton"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:backgroundTint="@color/primary"
-            android:paddingHorizontal="5dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:layout_gravity="bottom"
-            android:text="Buy Now" />
-
-    </LinearLayout>
 
 </LinearLayout>
