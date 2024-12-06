@@ -58,7 +58,6 @@ class LoginActivity : AppCompatActivity() {
     private fun initializeUI() {
         // Set up UI elements
         binding.loginEmailButton.backgroundTintList = ContextCompat.getColorStateList(this, R.color.primary)
-        binding.loginGoogleButton.backgroundTintList = ContextCompat.getColorStateList(this, R.color.primary)
 
         binding.progressBar.visibility = android.view.View.GONE
 

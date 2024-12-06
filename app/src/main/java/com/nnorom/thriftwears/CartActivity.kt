@@ -46,7 +46,6 @@ import kotlin.collections.ArrayList
 class CartActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCartBinding
-    private var currentFragmentTag: String? = null
     private var currentState: String? = null
     private lateinit var cartRecyclerView: RecyclerView
     private lateinit var totalPriceTextView: TextView
@@ -60,7 +59,7 @@ class CartActivity : AppCompatActivity() {
     private val returnUrl = "https://app://thriftwears/home"
 
     companion object {
-        private const val MODEL_KEY = "MODEL_KEY"
+        private const val MODEL_KEY = "CART_KEY"
         private const val TAG = "CART"
     }
 
@@ -98,13 +97,16 @@ class CartActivity : AppCompatActivity() {
             intent.getParcelableArrayListExtra("cart_data")
         }
 
+        cartData?.let {
+            globalCartViewModel.clearCart()
+            for (item in it) {
+                globalCartViewModel.addItem(item)
+            }
+        }
+
         if (cartData!!.isNotEmpty()) {
             authenticatePaypal(clientId, clientSecret)
             binding.emptyCart.visibility = View.GONE
-
-            for (item in cartData) {
-                globalCartViewModel.addItem(item)
-            }
 
             cartRecyclerView = findViewById(R.id.cartRecyclerView)
             totalPriceTextView = findViewById(R.id.totalPriceTextView)
@@ -151,7 +153,7 @@ class CartActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(MODEL_KEY, currentFragmentTag)
+        outState.putString(MODEL_KEY, currentState)
     }
 
     @SuppressLint("DefaultLocale")

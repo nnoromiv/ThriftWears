@@ -67,8 +67,6 @@ class SignupActivity : AppCompatActivity() {
     private fun initializeUI() {
         // Set up UI elements
         binding.createAccountButton.backgroundTintList = ContextCompat.getColorStateList(this, R.color.primary)
-        binding.createAccountGoogleButton.backgroundTintList = ContextCompat.getColorStateList(this, R.color.primary)
-
 
         binding.progressBar.visibility = android.view.View.GONE
 

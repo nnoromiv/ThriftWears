@@ -69,4 +69,5 @@ dependencies {
     implementation ("com.paypal.android:paypal-web-payments:2.0.0-beta1")
     implementation ("com.paypal.android:payment-buttons:2.0.0-beta1")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
 }

@@ -1,192 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:paddingVertical="20dp"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
+    android:scrollbars="none"
     android:id="@+id/login_activity"
+    android:background="@color/white"
+    android:backgroundTint="@color/white"
     android:fitsSystemWindows="true"
     tools:context=".LoginActivity">
 
-    <TextView
-        android:id="@+id/closeLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/primary"
-        android:gravity="start"
-        android:fontFamily="@font/century_gothic"
-        android:text="@string/log_in"
-        android:layout_marginBottom="10dp"
-        android:padding="10dp"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:drawableEndCompat="@drawable/close"
-        app:drawableTint="@color/white"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/topSection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingHorizontal="10dp">
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/welcome_to_thriftwears"
-        android:fontFamily="@font/century_gothic"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="26sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:fontFamily="@font/century_gothic"
-        android:text="@string/you_can_use_your_email_address_to_login_or_continue_with_your_social_account"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="12sp" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/white"
-        android:background="@color/white"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/loginEmail"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:fontFamily="@font/century_gothic"
-            android:backgroundTint="@color/lightGrey"
-            android:background="@drawable/grey_rounded_button"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:textAlignment="viewStart"
-            android:textColor="@color/black"
-            app:drawableEndCompat="@drawable/user" />
-
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/loginPassword"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:fontFamily="@font/century_gothic"
-            android:backgroundTint="@color/lightGrey"
-            android:background="@drawable/grey_rounded_button"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:textAlignment="viewStart"
-            android:textColor="@color/black" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
-            android:layout_marginTop="8dp"
-            android:layout_marginHorizontal="10dp"
-            android:id="@+id/togglePassword"
+            android:id="@+id/closeLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/primary"
+            android:gravity="start"
             android:fontFamily="@font/century_gothic"
-            android:gravity="end"
-            android:text="@string/show_password"
-            android:padding="5dp"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="14sp"
+            android:text="@string/log_in"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:drawableEndCompat="@drawable/close"
+            app:drawableTint="@color/white"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_to_thriftwears"
+            android:fontFamily="@font/century_gothic"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:paddingHorizontal="10dp"
             android:textStyle="bold" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:fontFamily="@font/century_gothic"
+            android:text="@string/you_can_use_your_email_address_to_login_or_continue_with_your_social_account"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:paddingHorizontal="10dp"
+            android:textSize="12sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            android:background="@color/white"
+            android:paddingHorizontal="10dp"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/loginEmail"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:fontFamily="@font/century_gothic"
+                android:backgroundTint="@color/lightGrey"
+                android:background="@drawable/grey_rounded_button"
+                android:hint="@string/email"
+                android:textColorHint="@color/black"
+                android:inputType="textEmailAddress"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                app:drawableEndCompat="@drawable/user" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/loginPassword"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:fontFamily="@font/century_gothic"
+                android:backgroundTint="@color/lightGrey"
+                android:background="@drawable/grey_rounded_button"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="10dp"
+                android:id="@+id/togglePassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/century_gothic"
+                android:gravity="end"
+                android:text="@string/show_password"
+                android:padding="5dp"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:layout_margin="5dp"
-        android:orientation="vertical">
+        android:id="@+id/bottomSection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/loginEmailButton"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
             android:backgroundTint="@color/primary"
             android:fontFamily="@font/century_gothic"
             android:paddingHorizontal="5dp"
-            android:layout_marginBottom="10dp"
+            android:text="@string/use_email"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            android:text="@string/use_email" />
+            android:textStyle="bold" />
 
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:indeterminateTint="@color/primary"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp">
-
-            <!-- Left Line -->
-            <view
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:background="#B0B0B0"
-                class="android.widget.TextView"/>
-
-            <!-- "OR" Text -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/or"
-                android:fontFamily="@font/century_gothic"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <!-- Right Line -->
-            <view
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:background="#B0B0B0"
-                class="android.widget.TextView"/>
-        </LinearLayout>
-
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/loginGoogleButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/primary"
-            android:fontFamily="@font/century_gothic"
-            android:textColor="@color/white"
-            android:text="@string/login_with_google"
-            android:textStyle="bold"
-            app:drawableEndCompat="@drawable/google" />
+            android:indeterminateTint="@color/primary" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -198,9 +161,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:fontFamily="@font/century_gothic"
                 android:text="@string/don_t_have_an_account"
                 android:textAlignment="center"
-                android:fontFamily="@font/century_gothic"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
@@ -209,8 +172,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:text="@string/create_an_account"
                 android:fontFamily="@font/century_gothic"
+                android:text="@string/create_an_account"
                 android:textAlignment="center"
                 android:textColor="@color/primary"
                 android:textSize="12sp" />
@@ -219,6 +182,5 @@
 
     </LinearLayout>
 
-    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-</LinearLayout>

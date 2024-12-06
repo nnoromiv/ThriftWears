@@ -23,17 +23,7 @@ class MainActivity : AppCompatActivity() {
     private val globalCartViewModel : GlobalCartViewModel by viewModels()
 
     companion object {
-        private const val MODEL_KEY = "MODEL_KEY"
-
-        fun replaceFragment(mainActivity: MainActivity, fragment: Fragment, tag: String) {
-            if (mainActivity.currentFragmentTag == tag) return // Avoid replacing with the same fragment
-
-            mainActivity.supportFragmentManager.beginTransaction().apply {
-                replace(R.id.frame_layout, fragment, tag)
-                commit()
-            }
-            mainActivity.currentFragmentTag = tag
-        }
+        const val MAIN_ACTIVITY_KEY = "MAIN_ACTIVITY_KEY"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,13 +37,11 @@ class MainActivity : AppCompatActivity() {
         @Suppress("DEPRECATION")
         window.statusBarColor = getColor(R.color.primary)
 
-        currentFragmentTag = savedInstanceState?.getString(MODEL_KEY)
-        if (currentFragmentTag == null) {
-            replaceFragment(this, Home(globalCartViewModel), Home::class.java.simpleName)
-        } else {
-            val fragment = supportFragmentManager.findFragmentByTag(currentFragmentTag) ?: Home(globalCartViewModel)
-            replaceFragment(this, fragment, currentFragmentTag!!)
+        if (savedInstanceState?.getString(MAIN_ACTIVITY_KEY) == null) {
+            replaceFragment(Home(), Home::class.java.simpleName)
         }
+
+        currentFragmentTag?.let { replaceFragment(Home(), it) }
 
         val cartData : ArrayList<CartItem>? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableArrayListExtra("cart_data", CartItem::class.java)
@@ -62,9 +50,9 @@ class MainActivity : AppCompatActivity() {
             intent.getParcelableArrayListExtra("cart_data")
         }
 
-        if (cartData != null) {
+        cartData?.let {
             globalCartViewModel.clearCart()
-            for (item in cartData) {
+            for (item in it) {
                 globalCartViewModel.addItem(item)
             }
         }
@@ -72,9 +60,9 @@ class MainActivity : AppCompatActivity() {
         // Set up bottom navigation item selection
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             val selectedFragment = when (item.itemId) {
-                R.id.home -> Home(globalCartViewModel)
-                R.id.profile -> Profile(globalCartViewModel)
-                R.id.search -> Search(globalCartViewModel)
+                R.id.home -> Home()
+                R.id.profile -> Profile()
+                R.id.search -> Search()
                 R.id.wish_list -> Saved()
                 R.id.upload -> Upload()
                 else -> return@setOnItemSelectedListener false
@@ -83,7 +71,7 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigationView.visibility =
                 if (item.itemId == R.id.upload) View.GONE else View.VISIBLE
 
-            replaceFragment(this, selectedFragment, selectedFragment::class.java.simpleName)
+            replaceFragment(selectedFragment, selectedFragment::class.java.simpleName)
             true
         }
 
@@ -92,7 +80,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(MODEL_KEY, currentFragmentTag)
+        outState.putString(MAIN_ACTIVITY_KEY, currentFragmentTag)
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -111,6 +99,26 @@ class MainActivity : AppCompatActivity() {
             Log.d("CustomScheme", "Scheme: $scheme, Host: $host, Path: $path")
         }
     }
+
+    private fun replaceFragment(fragment: Fragment, tag: String) {
+        val transaction = supportFragmentManager.beginTransaction()
+
+        // Find existing Fragment
+        val existingFragment = supportFragmentManager.findFragmentByTag(tag)
+        if (existingFragment != null) {
+            // Show the existing Fragment
+            supportFragmentManager.fragments.forEach { transaction.hide(it) }
+            transaction.show(existingFragment)
+        } else {
+            // Create and add the new Fragment
+            transaction.add(R.id.frame_layout, fragment, tag)
+            supportFragmentManager.fragments.forEach { transaction.hide(it) }
+        }
+
+        transaction.commit()
+        currentFragmentTag = tag
+    }
+
 
 
 }

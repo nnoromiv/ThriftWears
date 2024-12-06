@@ -167,7 +167,6 @@ class HomeBody @JvmOverloads constructor(
             Toast.makeText(context, "Filtered by ${chip.text} Only", Toast.LENGTH_SHORT).show()
         }
 
-
         savedChip.setOnClickListener { toggleChipAppearance(savedChip) }
         menChip.setOnClickListener { toggleChipAppearance(menChip) }
         womenChip.setOnClickListener { toggleChipAppearance(womenChip) }

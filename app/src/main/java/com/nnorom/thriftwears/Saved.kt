@@ -15,8 +15,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.ktx.Firebase
+import com.nnorom.thriftwears.MainActivity.Companion.MAIN_ACTIVITY_KEY
+import com.nnorom.thriftwears.viewmodel.GlobalCartViewModel
 
-class Saved : Fragment() {
+class Saved : Fragment(R.layout.saved) {
 
     private var _binding: SavedBinding? = null
     private val binding get() = _binding!!
@@ -117,6 +119,11 @@ class Saved : Fragment() {
             .addOnFailureListener { exception ->
                 Log.d("SAVED", "Error getting documents: ", exception)
             }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(MAIN_ACTIVITY_KEY, Saved::class.java.simpleName)
     }
 
 }

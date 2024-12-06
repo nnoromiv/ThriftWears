@@ -1,5 +1,6 @@
 package com.nnorom.thriftwears
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -10,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nnorom.thriftwears.adapter.CardViewAdapter
@@ -18,6 +20,7 @@ import com.nnorom.thriftwears.item.ProductItem
 import com.nnorom.thriftwears.viewmodel.GlobalCartViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.firestore
+import com.nnorom.thriftwears.MainActivity.Companion.MAIN_ACTIVITY_KEY
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -25,14 +28,13 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.collections.ArrayList
 
-class Search(
-    private val globalCartViewModel: GlobalCartViewModel
-) : Fragment() {
+class Search : Fragment(R.layout.search) {
 
     private var _binding: SearchBinding? = null
     private val binding get() = _binding!!
     private val db = com.google.firebase.Firebase.firestore
     private var searchJob: Job? = null
+    private lateinit var globalCartViewModel: GlobalCartViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +43,11 @@ class Search(
         _binding = SearchBinding.inflate(inflater, container, false)
 
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        globalCartViewModel = ViewModelProvider(requireActivity())[GlobalCartViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -126,6 +133,11 @@ class Search(
         return input.split(" ").joinToString(" ") { word ->
             word.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(MAIN_ACTIVITY_KEY, Search::class.java.simpleName)
     }
 
 }

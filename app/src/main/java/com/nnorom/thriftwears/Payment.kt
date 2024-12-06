@@ -21,7 +21,7 @@ class Payment(
     private var currentState: String? = null
 
     companion object {
-        private const val MODEL_KEY = "ITEM_MODEL_KEY"
+        private const val MODEL_KEY = "PAYMENT_KEY"
     }
 
     override fun onCreateView(

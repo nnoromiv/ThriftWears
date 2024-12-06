@@ -1,6 +1,7 @@
 package com.nnorom.thriftwears
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.icu.util.ULocale
@@ -11,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import com.nnorom.thriftwears.databinding.ProfileBinding
 import com.nnorom.thriftwears.item.UserItem
 import com.nnorom.thriftwears.profile.ProfileBar
@@ -21,17 +23,18 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.firestore
+import com.nnorom.thriftwears.MainActivity.Companion.MAIN_ACTIVITY_KEY
+import com.nnorom.thriftwears.databinding.HomeBinding
 import java.util.Date
 
-class Profile(
-    private val globalCartViewModel: GlobalCartViewModel
-) : Fragment() {
+class Profile: Fragment(R.layout.profile) {
 
     private var _binding: ProfileBinding? = null
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
     private val db = com.google.firebase.Firebase.firestore
     private var userItemClassData = UserItem()
+    private lateinit var globalCartViewModel: GlobalCartViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +49,11 @@ class Profile(
         } else {
             getUserData(currentUser.uid)
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        globalCartViewModel = ViewModelProvider(requireActivity())[GlobalCartViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -104,6 +112,11 @@ class Profile(
         val outputFormat = SimpleDateFormat("MMM. yyyy", ULocale.ENGLISH)
 
         return "Member since" + " " + outputFormat.format(date)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(MAIN_ACTIVITY_KEY, Profile::class.java.simpleName)
     }
 
 }

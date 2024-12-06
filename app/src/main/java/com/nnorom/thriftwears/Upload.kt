@@ -25,9 +25,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.nnorom.thriftwears.MainActivity.Companion.MAIN_ACTIVITY_KEY
 import com.squareup.picasso.Picasso
 
-class Upload : Fragment() {
+class Upload : Fragment(R.layout.upload) {
 
     private var _binding: UploadBinding? = null
     private val binding get() = _binding!!
@@ -240,6 +241,11 @@ class Upload : Fragment() {
         super.onDestroyView()
         Picasso.get().cancelTag("IMAGE_LOADING")
         _binding = null // Avoid memory leaks
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(MAIN_ACTIVITY_KEY, Upload::class.java.simpleName)
     }
 
     private fun updateUI() {
