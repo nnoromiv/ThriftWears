@@ -119,6 +119,4 @@ class MainActivity : AppCompatActivity() {
         currentFragmentTag = tag
     }
 
-
-
 }

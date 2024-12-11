@@ -47,6 +47,13 @@
 
     </LinearLayout>
 
+    <com.nnorom.thriftwears.components.EmptySaved
+        android:id="@+id/emptySaved"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_height="match_parent"
+        />
+
     <!-- RecyclerView for Saved Items -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/savedItemsRecyclerView"

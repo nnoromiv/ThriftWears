@@ -13,6 +13,7 @@
         android:paddingVertical="5dp"
         android:layout_height="wrap_content" />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/googleRecyclerView"
         android:layout_width="match_parent"
@@ -28,5 +29,6 @@
         android:paddingTop="8dp"
         android:clipToPadding="false"
         tools:listitem="@layout/card_view" />
+
 
 </LinearLayout>

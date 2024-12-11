@@ -103,12 +103,19 @@ class Saved : Fragment(R.layout.saved) {
                         .whereEqualTo("fileId", fileId)
                         .get()
                         .addOnSuccessListener { results ->
-                            for (document in results) {
-                                val product = document.toObject(ProductItem::class.java)
-                                productList.add(product)
+                            if(results.isEmpty){
+                                binding.emptySaved.visibility = View.VISIBLE
                             }
+                            else{
+                                binding.emptySaved.visibility = View.GONE
+                                for (document in results) {
+                                    val product = document.toObject(ProductItem::class.java)
+                                    productList.add(product)
+                                }
+                                Log.d("SAVED", "File IDs: $productList")
 
-                            binding.savedItemsRecyclerView.adapter = SavedCardViewAdapter(productList)
+                                binding.savedItemsRecyclerView.adapter = SavedCardViewAdapter(productList)
+                            }
                         }
                         .addOnFailureListener{ exception ->
                             Log.d("SAVED", "Error getting documents: ", exception)

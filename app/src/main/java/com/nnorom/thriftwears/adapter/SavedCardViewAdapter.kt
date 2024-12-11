@@ -15,7 +15,7 @@ import com.google.firebase.firestore.firestore
 import com.squareup.picasso.Picasso
 
 class SavedCardViewAdapter(
-    private val items: List<ProductItem>
+    private val items: MutableList<ProductItem>
 ) : RecyclerView.Adapter<SavedCardViewAdapter.SavedCardViewHolder>() {
 
     private lateinit var auth: FirebaseAuth
@@ -32,9 +32,11 @@ class SavedCardViewAdapter(
                 .into(binding.image)
 
             binding.description.text = buildString {
-                append(cardViewItem.description!!.slice(0..50))
-                append("...")
+                val description = cardViewItem.description ?: ""
+                append(description.slice(0 until minOf(description.length, 35)))
+                if (description.length > 35) append("...") // Add "..." only if text is truncated
             }
+
             binding.price.text = buildString {
                 append('£')
                 append(cardViewItem.price.toString())
